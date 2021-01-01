@@ -15,7 +15,7 @@ import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "organization")
-@Where(clause="deleted =false")
+@Where(clause = "deleted =false")
 public class OrganizationEntity extends BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -27,6 +27,10 @@ public class OrganizationEntity extends BaseEntity implements Serializable {
 
 	@Column(name = "name")
 	private String name;
+
+	@ManyToOne
+	@JoinColumn(name = "service_id", referencedColumnName = "id")
+	private ServiceEntity service;
 
 	@Column(name = "ruc")
 	private String ruc;
@@ -120,6 +124,14 @@ public class OrganizationEntity extends BaseEntity implements Serializable {
 
 	public void setAdminUserId(UserEntity adminUserId) {
 		this.adminUserId = adminUserId;
+	}
+
+	public ServiceEntity getService() {
+		return service;
+	}
+
+	public void setService(ServiceEntity service) {
+		this.service = service;
 	}
 
 }

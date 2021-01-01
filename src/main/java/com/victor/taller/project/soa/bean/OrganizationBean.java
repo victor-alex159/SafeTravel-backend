@@ -4,6 +4,7 @@ public class OrganizationBean extends BaseBean {
 
 	private Integer id;
 	private String name;
+	private ServiceBean service;
 	private String ruc;
 	private String direction;
 	private String phone;
@@ -82,5 +83,13 @@ public class OrganizationBean extends BaseBean {
 
 	public void setAdminUserId(UserBean adminUserId) {
 		this.adminUserId = adminUserId;
+	}
+
+	public ServiceBean getService() {
+		return service;
+	}
+
+	public void setService(ServiceBean service) {
+		this.service = service;
 	}
 }

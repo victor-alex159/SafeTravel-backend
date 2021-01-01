@@ -15,7 +15,7 @@ import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "service")
-@Where(clause="deleted =false")
+@Where(clause = "deleted =false")
 public class ServiceEntity extends BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -24,10 +24,6 @@ public class ServiceEntity extends BaseEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
 	private Integer id;
-
-	@ManyToOne
-	@JoinColumn(name = "product_id", referencedColumnName = "id")
-	private ProductEntity product;
 
 	@Column(name = "description")
 	private String description;
@@ -38,14 +34,6 @@ public class ServiceEntity extends BaseEntity implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public ProductEntity getProduct() {
-		return product;
-	}
-
-	public void setProduct(ProductEntity product) {
-		this.product = product;
 	}
 
 	public String getDescription() {
