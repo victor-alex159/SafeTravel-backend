@@ -9,5 +9,5 @@ public interface ProductService {
 	abstract ProductBean saveProduct(ProductBean productBean);
 	abstract List<ProductBean> getAllProducts();
 	abstract ProductBean getProductById(Integer productId);
-	
+	abstract List<ProductBean> getProductsByUserPrincipal(Integer userCreateId);
 }

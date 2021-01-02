@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -24,14 +25,20 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.victor.taller.project.service.ClientService;
 import com.victor.taller.project.service.ProductService;
+import com.victor.taller.project.service.UserService;
+import com.victor.taller.project.soa.bean.ClientBean;
+import com.victor.taller.project.soa.bean.OrganizationBean;
 import com.victor.taller.project.soa.bean.ProductBean;
+import com.victor.taller.project.soa.bean.UserBean;
 import com.victor.taller.project.soa.request.GenericRequest;
 import com.victor.taller.project.soa.response.GenericResponse;
 
@@ -43,13 +50,24 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
+
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private ClientService clientService;
 	
 	@RequestMapping(value = "/sp", method = RequestMethod.POST)
 	public GenericResponse<ProductBean> saveProduct(@RequestBody GenericRequest<ProductBean> request) {
 		logger.info("ProductController.saveProduct()");
 		GenericResponse<ProductBean> response = new GenericResponse<>();
 		ProductBean product = new ProductBean();
-		product = productService.saveProduct(request.getData());
+		ProductBean productAux = request.getData();
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		ClientBean user = clientService.getClientByUsername(principal.toString());
+		productAux.setOrganization(new OrganizationBean());
+		productAux.getOrganization().setId(user.getOrganization().getId());
+		product = productService.saveProduct(productAux);
 		response.setData(product);
 		return response;
 	}
@@ -116,5 +134,19 @@ public class ProductController {
 		}
 		return null;
 	}
+	
+	@RequestMapping(value = "/gpbup", method = RequestMethod.POST)
+	public GenericResponse<ProductBean> getProductsByUserPrincipal(@RequestBody GenericRequest<ProductBean> request) {
+		logger.info("ProductController.getProductsByUserPrincipal()");
+		GenericResponse<ProductBean> response = new GenericResponse<>();
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		ClientBean user = clientService.getClientByUsername(principal.toString());
+		List<ProductBean> productList = new ArrayList<>();
+		System.out.println(user);
+		productList = productService.getProductsByUserPrincipal(user.getOrganization().getId());
+		response.setDatalist(productList);
+		return response;
+	}
+	
 	
 }

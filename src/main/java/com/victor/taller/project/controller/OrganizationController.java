@@ -6,13 +6,17 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.victor.taller.project.security.UserPrincipal;
 import com.victor.taller.project.service.OrganizationService;
+import com.victor.taller.project.service.UserService;
 import com.victor.taller.project.soa.bean.OrganizationBean;
+import com.victor.taller.project.soa.bean.UserBean;
 import com.victor.taller.project.soa.request.GenericRequest;
 import com.victor.taller.project.soa.response.GenericResponse;
 
@@ -24,6 +28,9 @@ public class OrganizationController {
 	
 	@Autowired
 	private OrganizationService organizationService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping(value = "/so", method = RequestMethod.POST)
 	public GenericResponse<OrganizationBean> saveOrganization(@RequestBody GenericRequest<OrganizationBean> request) {
@@ -44,6 +51,18 @@ public class OrganizationController {
 		organizationList = organizationService.getAllOrganization();
 		response.setDatalist(organizationList);
 		return response;
+	}
+	
+	@RequestMapping(value = "/gobyp", method = RequestMethod.POST)
+	public GenericResponse<OrganizationBean> getOrganizationByUserPrincipal(@RequestBody GenericRequest<OrganizationBean> request) {
+		logger.info("OrganizationController.getOrganizationByUserCreateId()");
+		GenericResponse<OrganizationBean> response = new GenericResponse<>();
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserBean user = userService.getUserByUsername(principal.toString());
+		OrganizationBean org = new OrganizationBean();
+		//org = organizationService.getOrganizationByUserCreateId(user.getId());
+		response.setData(org);
+		return response;		
 	}
 	
 }

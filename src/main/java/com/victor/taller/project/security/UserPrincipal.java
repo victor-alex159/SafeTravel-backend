@@ -12,10 +12,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.victor.taller.project.entity.ClientEntity;
 import com.victor.taller.project.entity.ProfileEntity;
 import com.victor.taller.project.entity.UserEntity;
 
-public class UserPrincipal implements UserDetails {
+public class UserPrincipal implements UserDetails, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -33,7 +34,7 @@ public class UserPrincipal implements UserDetails {
 		this.authorities = authorities;
 	}
 
-	public static UserPrincipal create(UserEntity user) {
+	public static UserPrincipal create(ClientEntity user) {
 		List<ProfileEntity> profiles = new ArrayList<ProfileEntity>();
 		profiles.add(user.getProfile());
 		List<GrantedAuthority> authorities = profiles.stream()

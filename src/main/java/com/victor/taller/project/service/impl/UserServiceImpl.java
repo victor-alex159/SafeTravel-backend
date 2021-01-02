@@ -9,6 +9,7 @@ import com.victor.taller.project.entity.ProfileEntity;
 import com.victor.taller.project.entity.UserEntity;
 import com.victor.taller.project.repository.UserJpaRepository;
 import com.victor.taller.project.service.UserService;
+import com.victor.taller.project.soa.bean.ProfileBean;
 import com.victor.taller.project.soa.bean.UserBean;
 
 @Service
@@ -30,6 +31,27 @@ public class UserServiceImpl implements UserService {
 		
 		userEntity = userRepository.save(userEntity);
 		userBean.setId(userEntity.getId());
+		return userBean;
+	}
+
+	@Override
+	public UserBean getUserById(Integer id) {
+		UserEntity userEntity = userRepository.findById(id).orElse(null);
+		UserBean userBean = new UserBean();
+		BeanUtils.copyProperties(userEntity, userBean);
+		userBean.setProfile(new ProfileBean());
+		userBean.getProfile().setId(userEntity.getProfile().getId());
+		
+		return userBean;
+	}
+
+	@Override
+	public UserBean getUserByUsername(String username) {
+		UserEntity userEntity = userRepository.findByUsername(username);
+		UserBean userBean = new UserBean();
+		BeanUtils.copyProperties(userEntity, userBean);
+		userBean.setProfile(new ProfileBean());
+		userBean.getProfile().setId(userEntity.getProfile().getId());
 		return userBean;
 	}
 

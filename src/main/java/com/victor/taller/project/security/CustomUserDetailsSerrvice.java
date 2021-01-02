@@ -12,7 +12,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.victor.taller.project.entity.ClientEntity;
 import com.victor.taller.project.entity.UserEntity;
+import com.victor.taller.project.repository.ClientJpaRepository;
 import com.victor.taller.project.repository.UserJpaRepository;
 
 @Service
@@ -21,19 +23,23 @@ public class CustomUserDetailsSerrvice implements UserDetailsService {
 	@Autowired
 	private UserJpaRepository userRepository;
 	
+	@Autowired
+	private ClientJpaRepository clientRepository;
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		UserEntity user = userRepository.findOneByUsername(username);
-		if(user == null) {
+		//UserEntity user = userRepository.findByUsername(username);
+		ClientEntity clientUser = clientRepository.findByUsername(username);
+		if(clientUser == null) {
 			throw new UsernameNotFoundException(String.format("Usuario no existe", username));
 		}
 		
-		List<GrantedAuthority> roles = new ArrayList<>();
+		/*List<GrantedAuthority> roles = new ArrayList<>();
 		roles.add(new SimpleGrantedAuthority(user.getProfile().getLongDescription()));
 		
-		UserDetails userDetails = new User(user.getUsername(), user.getPassword(), roles);
+		UserDetails userDetails = new User(user.getUsername(), user.getPassword(), roles);*/
 		
-		return userDetails;
+		return UserPrincipal.create(clientUser);
 	}
 
 	

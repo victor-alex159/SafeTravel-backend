@@ -1,5 +1,7 @@
 package com.victor.taller.project.soa.bean;
 
+import java.sql.Date;
+
 public class ProductBean extends BaseBean {
 
 	private Integer id;
@@ -10,6 +12,8 @@ public class ProductBean extends BaseBean {
 	private String imagePath;
 	private String type;
 	private String ubication;
+	private Date startDate;
+	private Date endDate;
 
 	public Integer getId() {
 		return id;
@@ -73,6 +77,22 @@ public class ProductBean extends BaseBean {
 
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 
 }

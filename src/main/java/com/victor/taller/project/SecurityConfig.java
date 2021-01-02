@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private String signingKey;
 	
 	@Autowired
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(customDetailService).passwordEncoder(this.bcrypt());
 	}
 

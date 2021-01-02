@@ -10,9 +10,14 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
+import com.victor.taller.project.entity.ClientEntity;
+import com.victor.taller.project.entity.UserEntity;
+import com.victor.taller.project.repository.ClientJpaRepository;
+import com.victor.taller.project.repository.UserJpaRepository;
 import com.victor.taller.project.security.UserPrincipal;
 import com.victor.taller.project.util.DateUtil;
 
@@ -20,6 +25,12 @@ import com.victor.taller.project.util.DateUtil;
 @Aspect
 @Component
 public class RepositoryAuditTracking {
+	
+	@Autowired
+	private UserJpaRepository userRepository;
+	
+	@Autowired
+	private ClientJpaRepository clientRepository;
 	
 	private static final Logger logger = LogManager.getLogger();
 	
@@ -45,7 +56,9 @@ public class RepositoryAuditTracking {
 				}
 			}
 			if(PropertyUtils.getProperty(entity, "userCreateId") == null && !"anonymousUser".equals(principal)) {
-				PropertyUtils.setProperty(entity, "userCreateId", 3);
+				//UserEntity userEntity = userRepository.findByUsername(principal.toString());
+				ClientEntity clientEntity = clientRepository.findByUsername(principal.toString());
+				PropertyUtils.setProperty(entity, "userCreateId", clientEntity.getId());	
 			}
 			PropertyUtils.setProperty(entity, "updateDate", DateUtil.getTime());
 			Class clas = entity.getClass();

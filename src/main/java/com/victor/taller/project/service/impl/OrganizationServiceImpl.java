@@ -69,4 +69,10 @@ public class OrganizationServiceImpl implements OrganizationService {
 		
 	}
 
+	@Override
+	public List<OrganizationBean> getOrganizationByUserCreateId(Integer userCreateId) {
+
+		return null;
+	}
+
 }
