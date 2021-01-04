@@ -16,8 +16,8 @@ import org.springframework.stereotype.Component;
 
 import com.victor.taller.project.entity.ClientEntity;
 import com.victor.taller.project.entity.UserEntity;
-import com.victor.taller.project.repository.ClientJpaRepository;
-import com.victor.taller.project.repository.UserJpaRepository;
+import com.victor.taller.project.repository.jpa.ClientJpaRepository;
+import com.victor.taller.project.repository.jpa.UserJpaRepository;
 import com.victor.taller.project.security.UserPrincipal;
 import com.victor.taller.project.util.DateUtil;
 

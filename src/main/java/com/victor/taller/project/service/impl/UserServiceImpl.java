@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.victor.taller.project.entity.ProfileEntity;
 import com.victor.taller.project.entity.UserEntity;
-import com.victor.taller.project.repository.UserJpaRepository;
+import com.victor.taller.project.repository.jpa.UserJpaRepository;
 import com.victor.taller.project.service.UserService;
 import com.victor.taller.project.soa.bean.ProfileBean;
 import com.victor.taller.project.soa.bean.UserBean;

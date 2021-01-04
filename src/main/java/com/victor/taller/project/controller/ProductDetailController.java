@@ -1,5 +1,8 @@
 package com.victor.taller.project.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +33,15 @@ public class ProductDetailController {
 		ProductDetailBean productDetail = new ProductDetailBean();
 		productDetail = productDetailService.saveProducctDetail(request.getData());
 		response.setData(productDetail);
+		return response;
+	}
+	
+	@RequestMapping(value = "/gpd", method = RequestMethod.POST)
+	public GenericResponse<List<Map<String, Object>>> getProductDetail(@RequestBody GenericRequest<ProductBean> request) {
+		logger.info("ProductDetailController.getProductDetail()");
+		GenericResponse<List<Map<String, Object>>> response = new GenericResponse<>();
+		List<Map<String, Object>> productDetailList = productDetailService.getProductDetail(request.getData());
+		response.setData(productDetailList);
 		return response;
 	}
 	

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.victor.taller.project.entity.OrganizationEntity;
 import com.victor.taller.project.entity.ProductEntity;
-import com.victor.taller.project.repository.ProductJpaRepository;
+import com.victor.taller.project.repository.jpa.ProductJpaRepository;
 import com.victor.taller.project.service.ProductService;
 import com.victor.taller.project.soa.bean.OrganizationBean;
 import com.victor.taller.project.soa.bean.ProductBean;

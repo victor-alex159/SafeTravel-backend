@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.victor.taller.project.entity.OrganizationEntity;
 import com.victor.taller.project.entity.ServiceEntity;
 import com.victor.taller.project.entity.UserEntity;
-import com.victor.taller.project.repository.OrganizationJpaRepository;
+import com.victor.taller.project.repository.jpa.OrganizationJpaRepository;
 import com.victor.taller.project.service.OrganizationService;
 import com.victor.taller.project.soa.bean.OrganizationBean;
 import com.victor.taller.project.soa.bean.ServiceBean;

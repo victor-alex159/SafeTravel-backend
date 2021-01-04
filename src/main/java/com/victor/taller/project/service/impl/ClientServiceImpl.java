@@ -9,7 +9,7 @@ import com.victor.taller.project.entity.ClientEntity;
 import com.victor.taller.project.entity.OrganizationEntity;
 import com.victor.taller.project.entity.ProfileEntity;
 import com.victor.taller.project.entity.UserEntity;
-import com.victor.taller.project.repository.ClientJpaRepository;
+import com.victor.taller.project.repository.jpa.ClientJpaRepository;
 import com.victor.taller.project.service.ClientService;
 import com.victor.taller.project.soa.bean.ClientBean;
 import com.victor.taller.project.soa.bean.OrganizationBean;

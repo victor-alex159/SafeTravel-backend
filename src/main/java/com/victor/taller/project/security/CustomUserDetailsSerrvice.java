@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 
 import com.victor.taller.project.entity.ClientEntity;
 import com.victor.taller.project.entity.UserEntity;
-import com.victor.taller.project.repository.ClientJpaRepository;
-import com.victor.taller.project.repository.UserJpaRepository;
+import com.victor.taller.project.repository.jpa.ClientJpaRepository;
+import com.victor.taller.project.repository.jpa.UserJpaRepository;
 
 @Service
 public class CustomUserDetailsSerrvice implements UserDetailsService {

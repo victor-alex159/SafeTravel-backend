@@ -1,4 +1,4 @@
-package com.victor.taller.project.repository;
+package com.victor.taller.project.repository.jpa;
 
 import java.util.List;
 

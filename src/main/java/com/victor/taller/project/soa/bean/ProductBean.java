@@ -14,6 +14,8 @@ public class ProductBean extends BaseBean {
 	private String ubication;
 	private Date startDate;
 	private Date endDate;
+	private Date startDateRequest;
+	private Date endDateRequest;
 
 	public Integer getId() {
 		return id;
@@ -93,6 +95,22 @@ public class ProductBean extends BaseBean {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public Date getStartDateRequest() {
+		return startDateRequest;
+	}
+
+	public void setStartDateRequest(Date startDateRequest) {
+		this.startDateRequest = startDateRequest;
+	}
+
+	public Date getEndDateRequest() {
+		return endDateRequest;
+	}
+
+	public void setEndDateRequest(Date endDateRequest) {
+		this.endDateRequest = endDateRequest;
 	}
 
 }
