@@ -42,7 +42,7 @@ public class ProductDetailServiceImpl implements ProductDetailService {
 			List<Map<String, Object>> result = new ArrayList<>();
 			listResult.forEach(response -> {
 				Map<String, Object> map = new HashMap<>();
-				map.put("nameOrganization", response[0]);
+				map.put("name", response[0]);
 				map.put("imagePath", response[1]);
 				map.put("description", response[2]);
 				map.put("price", response[3]);
