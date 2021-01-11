@@ -15,21 +15,30 @@ public class ProductDetailJpaRepositoryImpl implements ProductDetailJpaRepositor
 	
 	@Override
 	public List<Object[]> getProductDetail(ProductBean productBean) {
-		StringBuffer queryStr = new StringBuffer("SELECT pro.name, pd.image_path, pd.description, pd.price, pd.address, pro.start_date, pro.end_date FROM product_detail pd ");
+		StringBuffer queryStr = new StringBuffer("SELECT pd.id, pro.name, pd.image_path, pd.description, pd.price, pd.address, pro.start_date, pro.end_date FROM product_detail pd ");
 		queryStr.append(" INNER JOIN product pro ON pd.product_id=pro.id WHERE ");
 		
-		if(productBean.getStartDateRequest() != null && productBean.getEndDateRequest() != null) {
-			queryStr.append(" pro.start_date BETWEEN :startDate AND :endDate ");
-			queryStr.append(" AND pro.end_date BETWEEN :startDate AND :endDate ");
+		if(productBean.getName() != null && !productBean.getName().isEmpty()) {
+			queryStr.append(" pro.name LIKE :name AND ");
 		}
 		
-		queryStr.append(" AND pro.deleted=false AND pd.deleted=false");
+		if(productBean.getStartDateRequest() != null && productBean.getEndDateRequest() != null) {
+			queryStr.append(" pro.start_date BETWEEN :startDate AND :endDate AND ");
+			queryStr.append(" pro.end_date BETWEEN :startDate AND :endDate AND");
+		}
+		
+		queryStr.append(" pro.deleted=false AND pd.deleted=false");
 		Query query = em.createNativeQuery(queryStr.toString());
+		
+		if(productBean.getName() != null && !productBean.getName().isEmpty()) {
+			query.setParameter("name", "%" +  productBean.getName() + "%");
+		}
 		
 		if(productBean.getStartDateRequest() != null && productBean.getEndDateRequest() != null) {
 			query.setParameter("startDate", productBean.getStartDateRequest());
 			query.setParameter("endDate", productBean.getEndDateRequest());
 		}
+		
 		
 		return query.getResultList();
 	}

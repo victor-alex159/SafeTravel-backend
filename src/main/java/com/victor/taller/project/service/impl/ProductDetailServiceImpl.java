@@ -20,16 +20,16 @@ import com.victor.taller.project.soa.bean.ProductDetailBean;
 public class ProductDetailServiceImpl implements ProductDetailService {
 
 	@Autowired
-	private ProductDetailJpaRepository productDetailJpaRepository;
+	private ProductDetailJpaRepository productDetailRepository;
 	
 	@Override
-	public ProductDetailBean saveProducctDetail(ProductDetailBean productDetailBean) {
+	public ProductDetailBean saveProductDetail(ProductDetailBean productDetailBean) {
 		ProductDetailEntity productDetailEntity = new ProductDetailEntity();
 		BeanUtils.copyProperties(productDetailBean, productDetailEntity);
 		productDetailEntity.setProduct(new ProductEntity());
 		productDetailEntity.getProduct().setId(productDetailBean.getProduct().getId());
 		
-		productDetailEntity = productDetailJpaRepository.save(productDetailEntity);
+		productDetailEntity = productDetailRepository.save(productDetailEntity);
 		productDetailBean.setId(productDetailEntity.getId());
 		
 		return productDetailBean;
@@ -37,24 +37,37 @@ public class ProductDetailServiceImpl implements ProductDetailService {
 
 	@Override
 	public List<Map<String, Object>> getProductDetail(ProductBean productBean) {
-		List<Object[]> listResult = productDetailJpaRepository.getProductDetail(productBean);
+		List<Object[]> listResult = productDetailRepository.getProductDetail(productBean);
 		if(listResult != null) {
 			List<Map<String, Object>> result = new ArrayList<>();
 			listResult.forEach(response -> {
 				Map<String, Object> map = new HashMap<>();
-				map.put("name", response[0]);
-				map.put("imagePath", response[1]);
-				map.put("description", response[2]);
-				map.put("price", response[3]);
-				map.put("address", response[4]);
-				map.put("startDate", response[5]);
-				map.put("endDate", response[6]);
+				map.put("id", response[0]);
+				map.put("name", response[1]);
+				map.put("imagePath", response[2]);
+				map.put("description", response[3]);
+				map.put("price", response[4]);
+				map.put("address", response[5]);
+				map.put("startDate", response[6]);
+				map.put("endDate", response[7]);
 				result.add(map);
 			});
 			return result;
 		}
 		
 		return null;
+	}
+
+	@Override
+	public ProductDetailBean getProductDetailById(Integer productDetailId) {
+		ProductDetailEntity productDetailEntity = productDetailRepository.findById(productDetailId).orElse(null);
+		ProductDetailBean productDetailBean = new ProductDetailBean();
+		BeanUtils.copyProperties(productDetailEntity, productDetailBean);
+		if(productDetailEntity.getProduct() != null) {
+			productDetailBean.setProduct(new ProductBean());
+			productDetailBean.getProduct().setId(productDetailEntity.getProduct().getId());
+		}
+		return productDetailBean;
 	}
 
 }

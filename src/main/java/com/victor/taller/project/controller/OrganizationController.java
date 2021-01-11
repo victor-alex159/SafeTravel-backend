@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.victor.taller.project.security.UserPrincipal;
+import com.victor.taller.project.service.ClientService;
 import com.victor.taller.project.service.OrganizationService;
 import com.victor.taller.project.service.UserService;
+import com.victor.taller.project.soa.bean.ClientBean;
 import com.victor.taller.project.soa.bean.OrganizationBean;
 import com.victor.taller.project.soa.bean.UserBean;
 import com.victor.taller.project.soa.request.GenericRequest;
@@ -28,6 +30,9 @@ public class OrganizationController {
 	
 	@Autowired
 	private OrganizationService organizationService;
+	
+	@Autowired
+	private ClientService clientService;
 	
 	@Autowired
 	private UserService userService;
@@ -53,16 +58,26 @@ public class OrganizationController {
 		return response;
 	}
 	
-	@RequestMapping(value = "/gobyp", method = RequestMethod.POST)
+	@RequestMapping(value = "/gobup", method = RequestMethod.POST)
 	public GenericResponse<OrganizationBean> getOrganizationByUserPrincipal(@RequestBody GenericRequest<OrganizationBean> request) {
 		logger.info("OrganizationController.getOrganizationByUserCreateId()");
 		GenericResponse<OrganizationBean> response = new GenericResponse<>();
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserBean user = userService.getUserByUsername(principal.toString());
+		ClientBean client = clientService.getClientByUsername(principal.toString());
 		OrganizationBean org = new OrganizationBean();
-		//org = organizationService.getOrganizationByUserCreateId(user.getId());
+		org = organizationService.getOrganizationById(client.getOrganization().getId());
 		response.setData(org);
 		return response;		
+	}
+	
+	@RequestMapping(value = "/gobi", method = RequestMethod.POST)
+	public GenericResponse<OrganizationBean> getOrganizationById(@RequestBody GenericRequest<OrganizationBean> request) {
+		logger.info("OrganizationController.getOrganizationById()");
+		GenericResponse<OrganizationBean> response = new GenericResponse<>();
+		OrganizationBean org = new OrganizationBean();
+		org = organizationService.getOrganizationById(request.getData().getId());
+		response.setData(org);
+		return response;
 	}
 	
 }

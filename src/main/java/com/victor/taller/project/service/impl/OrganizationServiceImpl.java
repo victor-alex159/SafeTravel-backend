@@ -75,4 +75,21 @@ public class OrganizationServiceImpl implements OrganizationService {
 		return null;
 	}
 
+	@Override
+	public OrganizationBean getOrganizationById(Integer organizationId) {
+		OrganizationEntity organizationEntity = organizationRepository.findById(organizationId).orElse(null);
+		OrganizationBean organizationBean = new OrganizationBean();
+		BeanUtils.copyProperties(organizationEntity, organizationBean);
+		if(organizationEntity.getService() != null) {
+			organizationBean.setService(new ServiceBean());
+			organizationBean.getService().setId(organizationEntity.getId());
+		}
+		if(organizationEntity.getAdminUserId() != null) {
+			organizationBean.setAdminUserId(new UserBean());
+			organizationBean.getAdminUserId().setId(organizationEntity.getAdminUserId().getId());
+		}
+		
+		return organizationBean;
+	}
+
 }

@@ -10,4 +10,5 @@ public interface ProductService {
 	abstract List<ProductBean> getAllProducts();
 	abstract ProductBean getProductById(Integer productId);
 	abstract List<ProductBean> getProductsByUserPrincipal(Integer userCreateId);
+	abstract List<ProductBean> getProductByType(ProductBean productBean);
 }

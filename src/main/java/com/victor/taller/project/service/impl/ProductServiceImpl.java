@@ -85,4 +85,22 @@ public class ProductServiceImpl implements ProductService {
 		return result;
 	}
 
+	@Override
+	public List<ProductBean> getProductByType(ProductBean productBean) {
+		List<ProductEntity> list = productRepository.getProductByType(productBean.getType());
+		List<ProductBean> result = new ArrayList<ProductBean>();
+		if(list != null) {
+			list.forEach(productEntity -> {
+				ProductBean prodBean = new ProductBean();
+				BeanUtils.copyProperties(productEntity, prodBean);
+				if(productEntity.getOrganization() != null) {
+					prodBean.setOrganization(new OrganizationBean());
+					prodBean.getOrganization().setId(productEntity.getOrganization().getId());
+				}
+				result.add(prodBean);
+			});
+		}
+		return result;
+	}
+
 }

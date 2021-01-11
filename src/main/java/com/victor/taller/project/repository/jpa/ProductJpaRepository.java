@@ -10,7 +10,10 @@ import com.victor.taller.project.entity.ProductEntity;
 
 public interface ProductJpaRepository extends PagingAndSortingRepository<ProductEntity, Integer>, ProductJpaRepositoryCustom {
 
-	@Query("SELECT o FROM ProductEntity o inner join o.organization org where org.id =:organizationId ")	
+	@Query("SELECT p FROM ProductEntity p inner join p.organization org where org.id =:organizationId and p.deleted=false ")	
 	public List<ProductEntity> getProductsByUserPrincipal(@Param("organizationId") Integer organizationId);
+	
+	@Query("SELECT p FROM ProductEntity p WHERE p.type=:type and deleted=false ")
+	public List<ProductEntity> getProductByType(@Param("type") String type);
 	
 }

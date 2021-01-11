@@ -148,5 +148,23 @@ public class ProductController {
 		return response;
 	}
 	
+	@RequestMapping(value = "/gpbi", method = RequestMethod.POST)
+	public GenericResponse<ProductBean> getProductById(@RequestBody GenericRequest<ProductBean> request) {
+		logger.info("ProductController.getProductById()");
+		GenericResponse<ProductBean> response = new GenericResponse<>();
+		ProductBean product = new ProductBean();
+		product = productService.getProductById(request.getData().getId());
+		response.setData(product);
+		return response;
+	}
+	
+	@RequestMapping(value = "/gpbt", method = RequestMethod.POST)
+	public GenericResponse<ProductBean> getProductByType(@RequestBody GenericRequest<ProductBean> request) {
+		logger.info("ProductController.getProductByType()");
+		GenericResponse<ProductBean> response = new GenericResponse<>();
+		List<ProductBean> productList = productService.getProductByType(request.getData());
+		response.setDatalist(productList);
+		return response;
+	}
 	
 }
