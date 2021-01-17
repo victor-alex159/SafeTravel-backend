@@ -10,6 +10,7 @@ public interface ProductDetailService {
 
 	abstract ProductDetailBean saveProductDetail(ProductDetailBean productDetailBean);
 	abstract List<Map<String, Object>> getProductDetail(ProductBean productBean);
-	abstract ProductDetailBean getProductDetailById(Integer productDetailId);
+	abstract ProductDetailBean getProductDetailById(Integer productlId);
+	abstract ProductDetailBean getProductDetailByProductId(Integer productDetailId);
 	
 }

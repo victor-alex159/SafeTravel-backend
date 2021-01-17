@@ -43,13 +43,14 @@ public class ProductDetailServiceImpl implements ProductDetailService {
 			listResult.forEach(response -> {
 				Map<String, Object> map = new HashMap<>();
 				map.put("id", response[0]);
-				map.put("name", response[1]);
-				map.put("imagePath", response[2]);
-				map.put("description", response[3]);
-				map.put("price", response[4]);
-				map.put("address", response[5]);
-				map.put("startDate", response[6]);
-				map.put("endDate", response[7]);
+				map.put("productId", response[1]);
+				map.put("name", response[2]);
+				map.put("imagePath", response[3]);
+				map.put("description", response[4]);
+				map.put("price", response[5]);
+				map.put("address", response[6]);
+				map.put("startDate", response[7]);
+				map.put("endDate", response[8]);
 				result.add(map);
 			});
 			return result;
@@ -58,6 +59,17 @@ public class ProductDetailServiceImpl implements ProductDetailService {
 		return null;
 	}
 
+	@Override
+	public ProductDetailBean getProductDetailByProductId(Integer productId) {
+		ProductDetailEntity productDetailEntity = productDetailRepository.getProductDetailByProductId(productId);
+		ProductDetailBean productDetailBean = new ProductDetailBean();
+		BeanUtils.copyProperties(productDetailEntity, productDetailBean);
+		if(productDetailEntity.getProduct() != null) {
+			productDetailBean.setProduct(new ProductBean());
+			productDetailBean.getProduct().setId(productDetailEntity.getProduct().getId());
+		}
+		return productDetailBean;
+	}
 	@Override
 	public ProductDetailBean getProductDetailById(Integer productDetailId) {
 		ProductDetailEntity productDetailEntity = productDetailRepository.findById(productDetailId).orElse(null);

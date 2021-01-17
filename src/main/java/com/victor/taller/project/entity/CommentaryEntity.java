@@ -15,7 +15,7 @@ import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "commentary")
-@Where(clause="deleted =false")
+@Where(clause = "deleted =false")
 public class CommentaryEntity extends BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -26,8 +26,8 @@ public class CommentaryEntity extends BaseEntity implements Serializable {
 	private Integer id;
 
 	@ManyToOne
-	@JoinColumn(name = "organization_id", referencedColumnName = "id")
-	private OrganizationEntity organization;
+	@JoinColumn(name = "product_id", referencedColumnName = "id")
+	private ProductEntity product;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -44,14 +44,6 @@ public class CommentaryEntity extends BaseEntity implements Serializable {
 		this.id = id;
 	}
 
-	public OrganizationEntity getOrganization() {
-		return organization;
-	}
-
-	public void setOrganization(OrganizationEntity organization) {
-		this.organization = organization;
-	}
-
 	public UserEntity getUser() {
 		return user;
 	}
@@ -66,6 +58,14 @@ public class CommentaryEntity extends BaseEntity implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public ProductEntity getProduct() {
+		return product;
+	}
+
+	public void setProduct(ProductEntity product) {
+		this.product = product;
 	}
 
 }

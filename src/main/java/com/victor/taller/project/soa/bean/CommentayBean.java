@@ -5,7 +5,7 @@ import com.victor.taller.project.entity.UserEntity;
 public class CommentayBean extends BaseBean {
 
 	private Integer id;
-	private OrganizationBean organization;
+	private ProductBean product;
 	private UserEntity user;
 	private String description;
 
@@ -15,14 +15,6 @@ public class CommentayBean extends BaseBean {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public OrganizationBean getOrganization() {
-		return organization;
-	}
-
-	public void setOrganization(OrganizationBean organization) {
-		this.organization = organization;
 	}
 
 	public UserEntity getUser() {
@@ -39,5 +31,13 @@ public class CommentayBean extends BaseBean {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public ProductBean getProduct() {
+		return product;
+	}
+
+	public void setProduct(ProductBean product) {
+		this.product = product;
 	}
 }

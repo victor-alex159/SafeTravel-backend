@@ -66,11 +66,11 @@ public class ProductDetailController {
 	}
 	
 	@RequestMapping(value = "/gpdbi", method = RequestMethod.POST)
-	public GenericResponse<ProductDetailBean> getProductDetailById(@RequestBody GenericRequest<ProductDetailBean> request) {
-		logger.info("ProductDetailController.getProductDetailById()");
+	public GenericResponse<ProductDetailBean> getProductDetailByProductId(@RequestBody GenericRequest<ProductDetailBean> request) {
+		logger.info("ProductDetailController.getProductDetailByProductId()");
 		GenericResponse<ProductDetailBean> response = new GenericResponse<>();
 		ProductDetailBean productDetail = new ProductDetailBean();
-		productDetail = productDetailService.getProductDetailById(request.getData().getId());
+		productDetail = productDetailService.getProductDetailByProductId(request.getData().getProduct().getId());
 		response.setData(productDetail);
 		return response;
 	}
