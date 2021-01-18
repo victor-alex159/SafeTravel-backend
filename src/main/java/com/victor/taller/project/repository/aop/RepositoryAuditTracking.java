@@ -56,9 +56,9 @@ public class RepositoryAuditTracking {
 				}
 			}
 			if(PropertyUtils.getProperty(entity, "userCreateId") == null && !"anonymousUser".equals(principal)) {
-				//UserEntity userEntity = userRepository.findByUsername(principal.toString());
-				ClientEntity clientEntity = clientRepository.findByUsername(principal.toString());
-				PropertyUtils.setProperty(entity, "userCreateId", clientEntity.getId());	
+				UserEntity userEntity = userRepository.findByUsername(principal.toString());
+				//ClientEntity clientEntity = clientRepository.findByUsername(principal.toString());
+				PropertyUtils.setProperty(entity, "userCreateId", userEntity.getId());	
 			}
 			PropertyUtils.setProperty(entity, "updateDate", DateUtil.getTime());
 			Class clas = entity.getClass();

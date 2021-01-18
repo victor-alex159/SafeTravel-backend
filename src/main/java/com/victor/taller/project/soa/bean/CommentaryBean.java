@@ -2,11 +2,10 @@ package com.victor.taller.project.soa.bean;
 
 import com.victor.taller.project.entity.UserEntity;
 
-public class CommentayBean extends BaseBean {
+public class CommentaryBean extends BaseBean {
 
 	private Integer id;
 	private ProductBean product;
-	private UserEntity user;
 	private String description;
 
 	public Integer getId() {
@@ -15,14 +14,6 @@ public class CommentayBean extends BaseBean {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public UserEntity getUser() {
-		return user;
-	}
-
-	public void setUser(UserEntity user) {
-		this.user = user;
 	}
 
 	public String getDescription() {

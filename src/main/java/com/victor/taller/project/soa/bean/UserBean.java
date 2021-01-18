@@ -5,6 +5,7 @@ import java.util.Date;
 public class UserBean extends BaseBean {
 
 	private Integer id;
+	private Integer organizationId;
 	private String documentType;
 	private String documentNumber;
 	private String genderTypeId;
@@ -129,5 +130,13 @@ public class UserBean extends BaseBean {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public Integer getOrganizationId() {
+		return organizationId;
+	}
+
+	public void setOrganizationId(Integer organizationId) {
+		this.organizationId = organizationId;
 	}
 }

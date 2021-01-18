@@ -35,7 +35,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.victor.taller.project.service.ClientService;
 import com.victor.taller.project.service.ProductService;
 import com.victor.taller.project.service.UserService;
-import com.victor.taller.project.soa.bean.ClientBean;
 import com.victor.taller.project.soa.bean.OrganizationBean;
 import com.victor.taller.project.soa.bean.ProductBean;
 import com.victor.taller.project.soa.bean.UserBean;
@@ -64,9 +63,9 @@ public class ProductController {
 		ProductBean product = new ProductBean();
 		ProductBean productAux = request.getData();
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		ClientBean user = clientService.getClientByUsername(principal.toString());
+		UserBean user = userService.getUserByUsername(principal.toString());
 		productAux.setOrganization(new OrganizationBean());
-		productAux.getOrganization().setId(user.getOrganization().getId());
+		productAux.getOrganization().setId(user.getOrganizationId());
 		product = productService.saveProduct(productAux);
 		response.setData(product);
 		return response;
@@ -140,10 +139,10 @@ public class ProductController {
 		logger.info("ProductController.getProductsByUserPrincipal()");
 		GenericResponse<ProductBean> response = new GenericResponse<>();
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		ClientBean user = clientService.getClientByUsername(principal.toString());
+		UserBean user = userService.getUserByUsername(principal.toString());
 		List<ProductBean> productList = new ArrayList<>();
 		System.out.println(user);
-		productList = productService.getProductsByUserPrincipal(user.getOrganization().getId());
+		productList = productService.getProductsByUserPrincipal(user.getOrganizationId());
 		response.setDatalist(productList);
 		return response;
 	}

@@ -66,6 +66,9 @@ public class UserEntity extends BaseEntity implements Serializable {
 	@Column(name = "phone")
 	private String phone;
 
+	@Column(name = "organization_id")
+	private Integer organizationId;
+
 	public Integer getId() {
 		return id;
 	}
@@ -176,6 +179,14 @@ public class UserEntity extends BaseEntity implements Serializable {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public Integer getOrganizationId() {
+		return organizationId;
+	}
+
+	public void setOrganizationId(Integer organizationId) {
+		this.organizationId = organizationId;
 	}
 
 }

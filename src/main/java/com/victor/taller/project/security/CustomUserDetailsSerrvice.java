@@ -28,9 +28,9 @@ public class CustomUserDetailsSerrvice implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		//UserEntity user = userRepository.findByUsername(username);
-		ClientEntity clientUser = clientRepository.findByUsername(username);
-		if(clientUser == null) {
+		UserEntity user = userRepository.findByUsername(username);
+		//ClientEntity clientUser = clientRepository.findByUsername(username);
+		if(user == null) {
 			throw new UsernameNotFoundException(String.format("Usuario no existe", username));
 		}
 		
@@ -39,7 +39,7 @@ public class CustomUserDetailsSerrvice implements UserDetailsService {
 		
 		UserDetails userDetails = new User(user.getUsername(), user.getPassword(), roles);*/
 		
-		return UserPrincipal.create(clientUser);
+		return UserPrincipal.create(user);
 	}
 
 	

@@ -34,7 +34,7 @@ public class UserPrincipal implements UserDetails, Serializable {
 		this.authorities = authorities;
 	}
 
-	public static UserPrincipal create(ClientEntity user) {
+	public static UserPrincipal create(UserEntity user) {
 		List<ProfileEntity> profiles = new ArrayList<ProfileEntity>();
 		profiles.add(user.getProfile());
 		List<GrantedAuthority> authorities = profiles.stream()

@@ -29,10 +29,6 @@ public class CommentaryEntity extends BaseEntity implements Serializable {
 	@JoinColumn(name = "product_id", referencedColumnName = "id")
 	private ProductEntity product;
 
-	@ManyToOne
-	@JoinColumn(name = "user_id", referencedColumnName = "id")
-	private UserEntity user;
-
 	@Column(name = "description")
 	private String description;
 
@@ -42,14 +38,6 @@ public class CommentaryEntity extends BaseEntity implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public UserEntity getUser() {
-		return user;
-	}
-
-	public void setUser(UserEntity user) {
-		this.user = user;
 	}
 
 	public String getDescription() {

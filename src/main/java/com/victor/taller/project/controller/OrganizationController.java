@@ -63,9 +63,9 @@ public class OrganizationController {
 		logger.info("OrganizationController.getOrganizationByUserCreateId()");
 		GenericResponse<OrganizationBean> response = new GenericResponse<>();
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		ClientBean client = clientService.getClientByUsername(principal.toString());
+		UserBean user = userService.getUserByUsername(principal.toString());
 		OrganizationBean org = new OrganizationBean();
-		org = organizationService.getOrganizationById(client.getOrganization().getId());
+		org = organizationService.getOrganizationById(user.getOrganizationId());
 		response.setData(org);
 		return response;		
 	}
