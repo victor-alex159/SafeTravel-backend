@@ -7,6 +7,7 @@ public class CommentaryBean extends BaseBean {
 	private Integer id;
 	private ProductBean product;
 	private String description;
+	private String username;
 
 	public Integer getId() {
 		return id;
@@ -30,5 +31,13 @@ public class CommentaryBean extends BaseBean {
 
 	public void setProduct(ProductBean product) {
 		this.product = product;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 }

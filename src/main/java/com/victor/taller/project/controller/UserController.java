@@ -30,5 +30,17 @@ public class UserController {
 		user = userService.saveUser(request.getData());
 		response.setData(user);
 		return response;
-	}	
+	}
+	
+	@RequestMapping(value = "/gubi", method = RequestMethod.POST)
+	public GenericResponse<UserBean> getUserById(@RequestBody GenericRequest<UserBean> request) {
+		logger.info("UserController.getUserById()");
+		GenericResponse<UserBean> response = new GenericResponse<UserBean>();
+		UserBean user = new UserBean();
+		user = userService.getUserById(request.getData().getId());
+		response.setData(user);
+		return response;
+	}
+	
+	
 }

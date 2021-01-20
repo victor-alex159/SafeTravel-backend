@@ -11,14 +11,19 @@ import com.victor.taller.project.entity.CommentaryEntity;
 import com.victor.taller.project.entity.ProductEntity;
 import com.victor.taller.project.repository.jpa.CommentaryJpaRepository;
 import com.victor.taller.project.service.CommentaryService;
+import com.victor.taller.project.service.UserService;
 import com.victor.taller.project.soa.bean.CommentaryBean;
 import com.victor.taller.project.soa.bean.ProductBean;
+import com.victor.taller.project.soa.bean.UserBean;
 
 @Service
 public class CommentaryServiceImpl implements CommentaryService {
 
 	@Autowired
 	private CommentaryJpaRepository commentaryRepository;
+	
+	@Autowired
+	private UserService userService;
 	
 	@Override
 	public CommentaryBean save(CommentaryBean commentaryBean) {
@@ -46,6 +51,10 @@ public class CommentaryServiceImpl implements CommentaryService {
 				if(commentaryEntity.getProduct() != null) {
 					commentaryBean.setProduct(new ProductBean());
 					commentaryBean.getProduct().setId(commentaryEntity.getProduct().getId());
+				}
+				if(commentaryEntity.getUserCreateId() != null) {
+					UserBean user = userService.getUserById(commentaryEntity.getUserCreateId());
+					commentaryBean.setUsername(user.getUsername());
 				}
 				result.add(commentaryBean);
 			});
