@@ -10,6 +10,7 @@ public class ProductDetailBean extends BaseBean {
 	private String description;
 	private String address;
 	private BigDecimal price;
+	private byte[] image;
 	private String imagePath;
 
 	public Integer getId() {
@@ -66,6 +67,14 @@ public class ProductDetailBean extends BaseBean {
 
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 }

@@ -42,6 +42,9 @@ public class ProductDetailEntity extends BaseEntity implements Serializable {
 	@Column(name = "address")
 	private String address;
 
+	@Column(name = "image")
+	private byte[] image;
+
 	@Column(name = "image_path")
 	private String imagePath;
 
@@ -99,6 +102,14 @@ public class ProductDetailEntity extends BaseEntity implements Serializable {
 
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 }

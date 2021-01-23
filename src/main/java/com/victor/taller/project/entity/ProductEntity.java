@@ -37,7 +37,7 @@ public class ProductEntity extends BaseEntity implements Serializable {
 	private String emailAdmin;
 
 	@Column(name = "image")
-	private String image;
+	private byte[] image;
 
 	@Column(name = "image_path")
 	private String imagePath;
@@ -110,13 +110,6 @@ public class ProductEntity extends BaseEntity implements Serializable {
 		this.ubication = ubication;
 	}
 
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
 
 	public Date getStartDate() {
 		return startDate;
@@ -132,6 +125,14 @@ public class ProductEntity extends BaseEntity implements Serializable {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 }

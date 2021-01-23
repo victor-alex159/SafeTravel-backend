@@ -20,6 +20,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -30,7 +31,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.victor.taller.project.service.ClientService;
 import com.victor.taller.project.service.ProductService;
@@ -107,6 +110,7 @@ public class ProductController {
 		return response;
 	}
 	
+	@Cacheable("imagesCache")
 	@RequestMapping(value = "/gf/{productId}")
 	public ResponseEntity<Resource> getFile(@PathVariable("productId") Integer productId) throws MalformedURLException {
 		logger.info("ProductController.getFile()");
@@ -165,5 +169,35 @@ public class ProductController {
 		response.setDatalist(productList);
 		return response;
 	}
+	
+	@RequestMapping(value = "/sv", method = RequestMethod.POST)
+	public GenericResponse<ProductBean> save(@RequestPart("product") ProductBean productBean, @RequestPart("file") MultipartFile file) throws IOException {
+		logger.info("ProductController.saveProduct()");
+		GenericResponse<ProductBean> response = new GenericResponse<>();
+		ProductBean product = new ProductBean();
+		ProductBean productAux = productBean;
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserBean user = userService.getUserByUsername(principal.toString());
+		productAux.setOrganization(new OrganizationBean());
+		productAux.getOrganization().setId(user.getOrganizationId());
+		if(file.getBytes().length > 0) {
+			productAux.setImage(file.getBytes());
+		}
+		product = productService.saveProduct(productAux);
+		response.setData(product);
+		return response;
+	}
+	
+	@RequestMapping(value = "/gi/{productId}", method = RequestMethod.POST)
+	public GenericResponse<byte[]> getImage(@PathVariable("productId") Integer productId) {
+		logger.info("ProductController.getImage()");
+		GenericResponse<byte[]> response = new GenericResponse<>();
+		ProductBean productBean = new ProductBean();
+		productBean = productService.getProductById(productId);
+		byte[] imageData = productBean.getImage();
+		response.setData(imageData);
+		return response;
+	}
+	
 	
 }

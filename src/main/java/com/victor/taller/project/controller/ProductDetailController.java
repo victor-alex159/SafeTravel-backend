@@ -29,7 +29,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.victor.taller.project.service.ProductDetailService;
 import com.victor.taller.project.soa.bean.ProductBean;
@@ -47,11 +49,15 @@ public class ProductDetailController {
 	private ProductDetailService productDetailService;
 	
 	@RequestMapping(value = "/spd", method = RequestMethod.POST)
-	public GenericResponse<ProductDetailBean> saveProductDetail(@RequestBody GenericRequest<ProductDetailBean> request) {
+	public GenericResponse<ProductDetailBean> saveProductDetail(@RequestPart("productDetail") ProductDetailBean productDetailBean, @RequestPart("file") MultipartFile file) throws IOException {
 		logger.info("ProductDetailController.saveProductDetail()");
 		GenericResponse<ProductDetailBean> response = new GenericResponse<>();
 		ProductDetailBean productDetail = new ProductDetailBean();
-		productDetail = productDetailService.saveProductDetail(request.getData());
+		productDetail = productDetailBean;
+		if(file.getBytes().length > 0) {
+			productDetail.setImage(file.getBytes());
+		}
+		productDetail = productDetailService.saveProductDetail(productDetail);
 		response.setData(productDetail);
 		return response;
 	}
@@ -129,5 +135,15 @@ public class ProductDetailController {
 		return null;
 	}
 	
+	@RequestMapping(value = "/gi/{producDetailtId}", method = RequestMethod.POST)
+	public GenericResponse<byte[]> getImage(@PathVariable("producDetailtId") Integer producDetailtId) {
+		logger.info("ProductDetailController.getImage()");
+		GenericResponse<byte[]> response = new GenericResponse<>();
+		ProductDetailBean productDetail = new ProductDetailBean();
+		productDetail = productDetailService.getProductDetailById(producDetailtId);
+		byte[] imageData = productDetail.getImage();
+		response.setData(imageData);
+		return response;
+	}
 	
 }

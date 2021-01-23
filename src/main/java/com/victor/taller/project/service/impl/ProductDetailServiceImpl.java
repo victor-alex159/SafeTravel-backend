@@ -45,7 +45,7 @@ public class ProductDetailServiceImpl implements ProductDetailService {
 				map.put("id", response[0]);
 				map.put("productId", response[1]);
 				map.put("name", response[2]);
-				map.put("imagePath", response[3]);
+				map.put("image", response[3]);
 				map.put("description", response[4]);
 				map.put("price", response[5]);
 				map.put("address", response[6]);

@@ -15,7 +15,7 @@ public class ProductDetailJpaRepositoryImpl implements ProductDetailJpaRepositor
 	
 	@Override
 	public List<Object[]> getProductDetail(ProductBean productBean) {
-		StringBuffer queryStr = new StringBuffer("SELECT pd.id, pd.product_id, pro.name, pd.image_path, pd.description, pd.price, pd.address, pro.start_date, pro.end_date FROM product_detail pd ");
+		StringBuffer queryStr = new StringBuffer("SELECT pd.id, pd.product_id, pro.name, pd.image, pd.description, pd.price, pd.address, pro.start_date, pro.end_date FROM product_detail pd ");
 		queryStr.append(" INNER JOIN product pro ON pd.product_id=pro.id WHERE ");
 		
 		if(productBean.getName() != null && !productBean.getName().isEmpty()) {

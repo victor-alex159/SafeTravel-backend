@@ -8,7 +8,7 @@ public class ProductBean extends BaseBean {
 	private OrganizationBean organization;
 	private String name;
 	private String emailAdmin;
-	private String image;
+	private byte[] image;
 	private String imagePath;
 	private String type;
 	private String ubication;
@@ -65,14 +65,6 @@ public class ProductBean extends BaseBean {
 		this.ubication = ubication;
 	}
 
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
 	public String getImagePath() {
 		return imagePath;
 	}
@@ -111,6 +103,14 @@ public class ProductBean extends BaseBean {
 
 	public void setEndDateRequest(Date endDateRequest) {
 		this.endDateRequest = endDateRequest;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 }
