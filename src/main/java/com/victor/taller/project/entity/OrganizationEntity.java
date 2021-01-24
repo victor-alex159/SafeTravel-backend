@@ -50,10 +50,6 @@ public class OrganizationEntity extends BaseEntity implements Serializable {
 	@Column(name = "responsable_payment_email")
 	private String responsablePaymentEmail;
 
-	@ManyToOne
-	@JoinColumn(name = "admin_user_id", referencedColumnName = "id")
-	private UserEntity adminUserId;
-
 	public Integer getId() {
 		return id;
 	}
@@ -116,14 +112,6 @@ public class OrganizationEntity extends BaseEntity implements Serializable {
 
 	public void setResponsablePaymentEmail(String responsablePaymentEmail) {
 		this.responsablePaymentEmail = responsablePaymentEmail;
-	}
-
-	public UserEntity getAdminUserId() {
-		return adminUserId;
-	}
-
-	public void setAdminUserId(UserEntity adminUserId) {
-		this.adminUserId = adminUserId;
 	}
 
 	public ServiceEntity getService() {
