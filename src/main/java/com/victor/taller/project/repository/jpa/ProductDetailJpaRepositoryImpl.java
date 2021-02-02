@@ -19,7 +19,7 @@ public class ProductDetailJpaRepositoryImpl implements ProductDetailJpaRepositor
 		queryStr.append(" INNER JOIN product pro ON pd.product_id=pro.id WHERE ");
 		
 		if(productBean.getName() != null && !productBean.getName().isEmpty()) {
-			queryStr.append(" pro.name LIKE :name AND ");
+			queryStr.append(" UPPER(pro.name) LIKE CONCAT('%',UPPER(:name),'%') AND ");
 		}
 		
 		if(productBean.getStartDateRequest() != null && productBean.getEndDateRequest() != null) {
@@ -31,7 +31,7 @@ public class ProductDetailJpaRepositoryImpl implements ProductDetailJpaRepositor
 		Query query = em.createNativeQuery(queryStr.toString());
 		
 		if(productBean.getName() != null && !productBean.getName().isEmpty()) {
-			query.setParameter("name", "%" +  productBean.getName() + "%");
+			query.setParameter("name", "%" + productBean.getName().toUpperCase() + "%");
 		}
 		
 		if(productBean.getStartDateRequest() != null && productBean.getEndDateRequest() != null) {
