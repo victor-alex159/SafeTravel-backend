@@ -67,8 +67,10 @@ public class ProductController {
 		ProductBean productAux = request.getData();
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserBean user = userService.getUserByUsername(principal.toString());
-		productAux.setOrganization(new OrganizationBean());
-		productAux.getOrganization().setId(user.getOrganizationId());
+		if(user.getOrganizationId() != null) {
+			productAux.setOrganization(new OrganizationBean());
+			productAux.getOrganization().setId(user.getOrganizationId());			
+		}
 		product = productService.saveProduct(productAux);
 		response.setData(product);
 		return response;
