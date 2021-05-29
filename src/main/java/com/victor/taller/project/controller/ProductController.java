@@ -63,16 +63,16 @@ public class ProductController {
 	public GenericResponse<ProductBean> saveProduct(@RequestBody GenericRequest<ProductBean> request) {
 		logger.info("ProductController.saveProduct()");
 		GenericResponse<ProductBean> response = new GenericResponse<>();
-		ProductBean product = new ProductBean();
-		ProductBean productAux = request.getData();
+		ProductBean product = request.getData();
+		ProductBean productAux = new ProductBean();
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserBean user = userService.getUserByUsername(principal.toString());
 		if(user.getOrganizationId() != null) {
-			productAux.setOrganization(new OrganizationBean());
-			productAux.getOrganization().setId(user.getOrganizationId());			
+			product.setOrganization(new OrganizationBean());
+			product.getOrganization().setId(user.getOrganizationId());			
 		}
-		product = productService.saveProduct(productAux);
-		response.setData(product);
+		productAux = productService.saveProduct(product);
+		response.setData(productAux);
 		return response;
 	}
 	
@@ -146,9 +146,11 @@ public class ProductController {
 		GenericResponse<ProductBean> response = new GenericResponse<>();
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserBean user = userService.getUserByUsername(principal.toString());
-		List<ProductBean> productList = new ArrayList<>();
+		List<ProductBean> productList = null;
 		System.out.println(user);
-		productList = productService.getProductsByUserPrincipal(user.getOrganizationId());
+		if(user.getOrganizationId() != null) {
+			productList = productService.getProductsByUserPrincipal(user.getOrganizationId());			
+		}
 		response.setDatalist(productList);
 		return response;
 	}
@@ -180,8 +182,10 @@ public class ProductController {
 		ProductBean productAux = productBean;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserBean user = userService.getUserByUsername(principal.toString());
-		productAux.setOrganization(new OrganizationBean());
-		productAux.getOrganization().setId(user.getOrganizationId());
+		if(user.getOrganizationId() != null) {
+			productAux.setOrganization(new OrganizationBean());
+			productAux.getOrganization().setId(user.getOrganizationId());			
+		}
 		if(file.getBytes().length > 0) {
 			productAux.setImage(file.getBytes());
 		}

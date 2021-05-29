@@ -60,12 +60,14 @@ public class OrganizationController {
 	
 	@RequestMapping(value = "/gobup", method = RequestMethod.POST)
 	public GenericResponse<OrganizationBean> getOrganizationByUserPrincipal(@RequestBody GenericRequest<OrganizationBean> request) {
-		logger.info("OrganizationController.getOrganizationByUserCreateId()");
+		logger.info("OrganizationController.getOrganizationByUserPrincipal()");
 		GenericResponse<OrganizationBean> response = new GenericResponse<>();
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserBean user = userService.getUserByUsername(principal.toString());
 		OrganizationBean org = new OrganizationBean();
-		org = organizationService.getOrganizationById(user.getOrganizationId());
+		if(user.getOrganizationId() != null) {
+			org = organizationService.getOrganizationById(user.getOrganizationId());			
+		}
 		response.setData(org);
 		return response;		
 	}
