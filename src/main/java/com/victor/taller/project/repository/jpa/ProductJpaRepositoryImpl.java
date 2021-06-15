@@ -15,10 +15,10 @@ public class ProductJpaRepositoryImpl implements ProductJpaRepositoryCustom {
 	
 	@Override
 	public List<Object[]> getProductByNameAndDates(ProductBean productBean) {
-		StringBuffer queryStr = new StringBuffer("SELECT pd.id, pd.name, pd.image, pd.long_description, pd.price, pd.ubication, pd.start_date, pd.end_date FROM product pd ");
+		StringBuffer queryStr = new StringBuffer("SELECT pd.id, pd.name, pd.image, pd.long_description, pd.price, pd.ubication, pd.start_date, pd.end_date FROM product pd WHERE ");
 		
 		if(productBean.getName() != null && !productBean.getName().isEmpty()) {
-			queryStr.append(" WHERE UPPER(pd.name) LIKE CONCAT('%',UPPER(:name),'%') AND ");
+			queryStr.append(" UPPER(pd.name) LIKE CONCAT('%',UPPER(:name),'%') AND ");
 		}
 		
 		if(productBean.getStartDateRequest() != null && productBean.getEndDateRequest() != null) {
