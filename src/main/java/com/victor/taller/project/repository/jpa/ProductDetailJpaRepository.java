@@ -1,4 +1,4 @@
-package com.victor.taller.project.repository.jpa;
+/*package com.victor.taller.project.repository.jpa;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -11,4 +11,4 @@ public interface ProductDetailJpaRepository extends PagingAndSortingRepository<P
 	@Query("SELECT pd FROM ProductDetailEntity pd WHERE pd.product.id=:productId AND pd.deleted=false ")
 	public ProductDetailEntity getProductDetailByProductId(@Param("productId") Integer productId);
 	
-}
+}*/

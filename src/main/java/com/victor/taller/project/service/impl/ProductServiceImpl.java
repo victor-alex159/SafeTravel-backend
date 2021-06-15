@@ -1,7 +1,9 @@
 package com.victor.taller.project.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,6 +103,29 @@ public class ProductServiceImpl implements ProductService {
 			});
 		}
 		return result;
+	}
+
+	@Override
+	public List<Map<String, Object>> getProductByNameAndDates(ProductBean productBean) {
+		List<Object[]> listResult = productRepository.getProductByNameAndDates(productBean);
+		if(listResult != null) {
+			List<Map<String, Object>> result = new ArrayList<>();
+			listResult.forEach(response -> {
+				Map<String, Object> map = new HashMap<>();
+				map.put("id", response[0]);
+				map.put("name", response[1]);
+				map.put("image", response[2]);
+				map.put("description", response[3]);
+				map.put("price", response[4]);
+				map.put("ubication", response[5]);
+				map.put("startDate", response[6]);
+				map.put("endDate", response[7]);
+				result.add(map);
+			});
+			return result;
+		}
+		
+		return null;
 	}
 
 }

@@ -6,6 +6,6 @@ import com.victor.taller.project.soa.bean.ProductBean;
 
 public interface ProductJpaRepositoryCustom {
 	
-	abstract List<Object[]> getProduct(ProductBean productBean);
+	abstract List<Object[]> getProductByNameAndDates(ProductBean productBean);
 
 }

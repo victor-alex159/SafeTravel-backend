@@ -1,4 +1,4 @@
-package com.victor.taller.project.service;
+/*package com.victor.taller.project.service;
 
 import java.util.List;
 import java.util.Map;
@@ -13,4 +13,4 @@ public interface ProductDetailService {
 	abstract ProductDetailBean getProductDetailById(Integer productlId);
 	abstract ProductDetailBean getProductDetailByProductId(Integer productDetailId);
 	
-}
+}*/

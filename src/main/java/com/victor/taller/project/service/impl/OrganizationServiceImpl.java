@@ -26,10 +26,6 @@ public class OrganizationServiceImpl implements OrganizationService {
 	public OrganizationBean saveOrganization(OrganizationBean orgBean) {
 		OrganizationEntity orgEntity = new OrganizationEntity();
 		BeanUtils.copyProperties(orgBean, orgEntity);
-		if(orgBean.getService() != null && orgBean.getService().getId() != null) {
-			orgEntity.setService(new ServiceEntity());
-			orgEntity.getService().setId(orgBean.getService().getId());
-		}
 		orgEntity = organizationRepository.save(orgEntity);
 		orgBean.setId(orgEntity.getId());
 		return orgBean;
@@ -43,10 +39,6 @@ public class OrganizationServiceImpl implements OrganizationService {
 			list.forEach(organizationEntity -> {
 				OrganizationBean orgBean = new OrganizationBean();
 				BeanUtils.copyProperties(organizationEntity, orgBean);
-				if(organizationEntity.getService() != null) {
-					orgBean.setService(new ServiceBean());
-					orgBean.getService().setId(organizationEntity.getService().getId());
-				}
 				result.add(orgBean);
 			});
 		}
@@ -71,10 +63,6 @@ public class OrganizationServiceImpl implements OrganizationService {
 		OrganizationEntity organizationEntity = organizationRepository.findById(organizationId).orElse(null);
 		OrganizationBean organizationBean = new OrganizationBean();
 		BeanUtils.copyProperties(organizationEntity, organizationBean);
-		if(organizationEntity.getService() != null) {
-			organizationBean.setService(new ServiceBean());
-			organizationBean.getService().setId(organizationEntity.getId());
-		}
 		
 		return organizationBean;
 	}

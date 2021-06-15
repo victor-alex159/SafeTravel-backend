@@ -1,4 +1,4 @@
-package com.victor.taller.project.controller;
+/*package com.victor.taller.project.controller;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -146,4 +146,4 @@ public class ProductDetailController {
 		return response;
 	}
 	
-}
+}*/

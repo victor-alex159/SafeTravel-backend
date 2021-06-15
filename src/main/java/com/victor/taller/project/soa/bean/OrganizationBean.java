@@ -12,6 +12,7 @@ public class OrganizationBean extends BaseBean {
 	private String responsablePaymentPhone;
 	private String responsablePaymentEmail;
 	private UserBean adminUserId;
+	private String photo;
 
 	public Integer getId() {
 		return id;
@@ -91,5 +92,13 @@ public class OrganizationBean extends BaseBean {
 
 	public void setService(ServiceBean service) {
 		this.service = service;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 }

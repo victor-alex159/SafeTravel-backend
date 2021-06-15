@@ -8,9 +8,9 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +35,6 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.victor.taller.project.service.ClientService;
 import com.victor.taller.project.service.ProductService;
 import com.victor.taller.project.service.UserService;
 import com.victor.taller.project.soa.bean.OrganizationBean;
@@ -55,9 +54,6 @@ public class ProductController {
 
 	@Autowired
 	private UserService userService;
-	
-	@Autowired
-	private ClientService clientService;
 	
 	@RequestMapping(value = "/sp", method = RequestMethod.POST)
 	public GenericResponse<ProductBean> saveProduct(@RequestBody GenericRequest<ProductBean> request) {
@@ -202,6 +198,14 @@ public class ProductController {
 		productBean = productService.getProductById(productId);
 		byte[] imageData = productBean.getImage();
 		response.setData(imageData);
+		return response;
+	}
+	@RequestMapping(value = "/gpbnad", method = RequestMethod.POST)
+	public GenericResponse<List<Map<String, Object>>> getProductByNameAndDates(@RequestBody GenericRequest<ProductBean> request) {
+		logger.info("ProductController.getProductByNameAndDates()");
+		GenericResponse<List<Map<String, Object>>> response = new GenericResponse<>();
+		List<Map<String, Object>> productList= productService.getProductByNameAndDates(request.getData());
+		response.setData(productList);
 		return response;
 	}
 	

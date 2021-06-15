@@ -1,4 +1,4 @@
-package com.victor.taller.project.entity;
+/*package com.victor.taller.project.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -112,4 +112,4 @@ public class ProductDetailEntity extends BaseEntity implements Serializable {
 		this.image = image;
 	}
 
-}
+}*/

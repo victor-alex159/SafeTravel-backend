@@ -11,5 +11,9 @@ public interface UserJpaRepository extends PagingAndSortingRepository<UserEntity
 	@Query("select u from UserEntity u where u.username = :username")
 	UserEntity findByUsername(@Param("username") String username);
 	
+	@Query("select u from UserEntity u where u.email=:email")
+	UserEntity findUserByEmail(@Param("email") String email);
 	
+	@Query("select u from UserEntity u where u.tokenResetPassword=:tokenResetPassword")
+	UserEntity findUserByTokenResetPassword(@Param("tokenResetPassword") String tokenResetPassword);
 }

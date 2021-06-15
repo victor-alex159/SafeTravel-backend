@@ -69,6 +69,9 @@ public class UserEntity extends BaseEntity implements Serializable {
 	@Column(name = "organization_id")
 	private Integer organizationId;
 
+	@Column(name = "token_reset_password")
+	private String tokenResetPassword;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -187,6 +190,14 @@ public class UserEntity extends BaseEntity implements Serializable {
 
 	public void setOrganizationId(Integer organizationId) {
 		this.organizationId = organizationId;
+	}
+
+	public String getTokenResetPassword() {
+		return tokenResetPassword;
+	}
+
+	public void setTokenResetPassword(String tokenResetPassword) {
+		this.tokenResetPassword = tokenResetPassword;
 	}
 
 }

@@ -19,6 +19,7 @@ public class UserBean extends BaseBean {
 	private String password;
 	private String email;
 	private String phone;
+	private String tokenResetPassword;
 
 	public Integer getId() {
 		return id;
@@ -138,5 +139,13 @@ public class UserBean extends BaseBean {
 
 	public void setOrganizationId(Integer organizationId) {
 		this.organizationId = organizationId;
+	}
+
+	public String getTokenResetPassword() {
+		return tokenResetPassword;
+	}
+
+	public void setTokenResetPassword(String tokenResetPassword) {
+		this.tokenResetPassword = tokenResetPassword;
 	}
 }

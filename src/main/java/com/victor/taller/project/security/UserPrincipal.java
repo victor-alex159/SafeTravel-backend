@@ -12,7 +12,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.victor.taller.project.entity.ClientEntity;
 import com.victor.taller.project.entity.ProfileEntity;
 import com.victor.taller.project.entity.UserEntity;
 

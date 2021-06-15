@@ -1,4 +1,4 @@
-package com.victor.taller.project.service.impl;
+/*package com.victor.taller.project.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -82,4 +82,4 @@ public class ProductDetailServiceImpl implements ProductDetailService {
 		return productDetailBean;
 	}
 
-}
+}*/

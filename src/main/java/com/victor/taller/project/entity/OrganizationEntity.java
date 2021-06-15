@@ -1,6 +1,7 @@
 package com.victor.taller.project.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,10 +29,6 @@ public class OrganizationEntity extends BaseEntity implements Serializable {
 	@Column(name = "name")
 	private String name;
 
-	@ManyToOne
-	@JoinColumn(name = "service_id", referencedColumnName = "id")
-	private ServiceEntity service;
-
 	@Column(name = "ruc")
 	private String ruc;
 
@@ -49,6 +46,10 @@ public class OrganizationEntity extends BaseEntity implements Serializable {
 
 	@Column(name = "responsable_payment_email")
 	private String responsablePaymentEmail;
+	
+	@Column(name = "photo")
+	private String photo;
+	
 
 	public Integer getId() {
 		return id;
@@ -114,12 +115,12 @@ public class OrganizationEntity extends BaseEntity implements Serializable {
 		this.responsablePaymentEmail = responsablePaymentEmail;
 	}
 
-	public ServiceEntity getService() {
-		return service;
+	public String getPhoto() {
+		return photo;
 	}
 
-	public void setService(ServiceEntity service) {
-		this.service = service;
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 
 }

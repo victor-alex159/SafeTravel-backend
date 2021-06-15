@@ -1,6 +1,7 @@
 package com.victor.taller.project.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -53,6 +54,24 @@ public class ProductEntity extends BaseEntity implements Serializable {
 
 	@Column(name = "end_date")
 	private Date endDate;
+	
+	@Column(name = "department")
+	private String department;
+	
+	@Column(name = "province")
+	private String province;
+	
+	@Column(name = "district")
+	private String district;
+	
+	@Column(name = "short_description")
+	private String short_description;
+	
+	@Column(name = "long_description")
+	private String long_description;
+	
+	@Column(name = "price")
+	private BigDecimal price;
 
 	public Integer getId() {
 		return id;
@@ -133,6 +152,54 @@ public class ProductEntity extends BaseEntity implements Serializable {
 
 	public void setImage(byte[] image) {
 		this.image = image;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+
+	public String getShort_description() {
+		return short_description;
+	}
+
+	public void setShort_description(String short_description) {
+		this.short_description = short_description;
+	}
+
+	public String getLong_description() {
+		return long_description;
+	}
+
+	public void setLong_description(String long_description) {
+		this.long_description = long_description;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
 	}
 
 }

@@ -1,6 +1,9 @@
 package com.victor.taller.project.soa.bean;
 
+import java.math.BigDecimal;
 import java.sql.Date;
+
+import javax.persistence.Column;
 
 public class ProductBean extends BaseBean {
 
@@ -16,7 +19,14 @@ public class ProductBean extends BaseBean {
 	private Date endDate;
 	private Date startDateRequest;
 	private Date endDateRequest;
-
+	@Column(name = "department")
+	private String department;
+	private String province;
+	private String district;
+	private String short_description;
+	private String long_description;
+	private BigDecimal price;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -111,6 +121,54 @@ public class ProductBean extends BaseBean {
 
 	public void setImage(byte[] image) {
 		this.image = image;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+
+	public String getShort_description() {
+		return short_description;
+	}
+
+	public void setShort_description(String short_description) {
+		this.short_description = short_description;
+	}
+
+	public String getLong_description() {
+		return long_description;
+	}
+
+	public void setLong_description(String long_description) {
+		this.long_description = long_description;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
 	}
 
 }

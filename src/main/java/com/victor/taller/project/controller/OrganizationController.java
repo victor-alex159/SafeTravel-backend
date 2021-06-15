@@ -12,11 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.victor.taller.project.security.UserPrincipal;
-import com.victor.taller.project.service.ClientService;
 import com.victor.taller.project.service.OrganizationService;
 import com.victor.taller.project.service.UserService;
-import com.victor.taller.project.soa.bean.ClientBean;
 import com.victor.taller.project.soa.bean.OrganizationBean;
 import com.victor.taller.project.soa.bean.UserBean;
 import com.victor.taller.project.soa.request.GenericRequest;
@@ -30,9 +27,6 @@ public class OrganizationController {
 	
 	@Autowired
 	private OrganizationService organizationService;
-	
-	@Autowired
-	private ClientService clientService;
 	
 	@Autowired
 	private UserService userService;

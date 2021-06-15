@@ -14,11 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import com.victor.taller.project.entity.ClientEntity;
 import com.victor.taller.project.entity.UserEntity;
-import com.victor.taller.project.repository.jpa.ClientJpaRepository;
 import com.victor.taller.project.repository.jpa.UserJpaRepository;
-import com.victor.taller.project.security.UserPrincipal;
 import com.victor.taller.project.util.DateUtil;
 
 
@@ -28,9 +25,6 @@ public class RepositoryAuditTracking {
 	
 	@Autowired
 	private UserJpaRepository userRepository;
-	
-	@Autowired
-	private ClientJpaRepository clientRepository;
 	
 	private static final Logger logger = LogManager.getLogger();
 	
