@@ -65,10 +65,10 @@ public class ProductEntity extends BaseEntity implements Serializable {
 	private String district;
 	
 	@Column(name = "short_description")
-	private String short_description;
+	private String shortDescription;
 	
 	@Column(name = "long_description")
-	private String long_description;
+	private String lonDescription;
 	
 	@Column(name = "price")
 	private BigDecimal price;
@@ -178,20 +178,20 @@ public class ProductEntity extends BaseEntity implements Serializable {
 		this.district = district;
 	}
 
-	public String getShort_description() {
-		return short_description;
+	public String getShortDescription() {
+		return shortDescription;
 	}
 
-	public void setShort_description(String short_description) {
-		this.short_description = short_description;
+	public void setShortDescription(String shortDescription) {
+		this.shortDescription = shortDescription;
 	}
 
-	public String getLong_description() {
-		return long_description;
+	public String getLongDescription() {
+		return lonDescription;
 	}
 
-	public void setLong_description(String long_description) {
-		this.long_description = long_description;
+	public void setLongDescription(String lonDescription) {
+		this.lonDescription = lonDescription;
 	}
 
 	public BigDecimal getPrice() {

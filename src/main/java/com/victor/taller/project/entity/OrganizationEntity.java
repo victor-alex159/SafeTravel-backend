@@ -48,7 +48,7 @@ public class OrganizationEntity extends BaseEntity implements Serializable {
 	private String responsablePaymentEmail;
 	
 	@Column(name = "photo")
-	private String photo;
+	private byte[] photo;
 	
 
 	public Integer getId() {
@@ -115,11 +115,11 @@ public class OrganizationEntity extends BaseEntity implements Serializable {
 		this.responsablePaymentEmail = responsablePaymentEmail;
 	}
 
-	public String getPhoto() {
+	public byte[] getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(String photo) {
+	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
 
