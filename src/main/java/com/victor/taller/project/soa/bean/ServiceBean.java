@@ -3,6 +3,7 @@ package com.victor.taller.project.soa.bean;
 public class ServiceBean extends BaseBean {
 	private Integer id;
 	private String description;
+	private String code;
 
 	public Integer getId() {
 		return id;
@@ -18,6 +19,14 @@ public class ServiceBean extends BaseBean {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 }

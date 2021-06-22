@@ -3,8 +3,6 @@ package com.victor.taller.project.soa.bean;
 import java.math.BigDecimal;
 import java.sql.Date;
 
-import javax.persistence.Column;
-
 public class ProductBean extends BaseBean {
 
 	private Integer id;
@@ -19,13 +17,13 @@ public class ProductBean extends BaseBean {
 	private Date endDate;
 	private Date startDateRequest;
 	private Date endDateRequest;
-	@Column(name = "department")
 	private String department;
 	private String province;
 	private String district;
 	private String shortDescription;
 	private String longDescription;
 	private BigDecimal price;
+	private String serviceId;
 	
 	public Integer getId() {
 		return id;
@@ -169,6 +167,14 @@ public class ProductBean extends BaseBean {
 
 	public void setPrice(BigDecimal price) {
 		this.price = price;
+	}
+
+	public String getServiceId() {
+		return serviceId;
+	}
+
+	public void setServiceId(String serviceId) {
+		this.serviceId = serviceId;
 	}
 
 }

@@ -68,10 +68,13 @@ public class ProductEntity extends BaseEntity implements Serializable {
 	private String shortDescription;
 	
 	@Column(name = "long_description")
-	private String lonDescription;
+	private String longDescription;
 	
 	@Column(name = "price")
 	private BigDecimal price;
+	
+	@Column(name = "service_id")
+	private String serviceId; 
 
 	public Integer getId() {
 		return id;
@@ -187,11 +190,11 @@ public class ProductEntity extends BaseEntity implements Serializable {
 	}
 
 	public String getLongDescription() {
-		return lonDescription;
+		return longDescription;
 	}
 
-	public void setLongDescription(String lonDescription) {
-		this.lonDescription = lonDescription;
+	public void setLongDescription(String longDescription) {
+		this.longDescription = longDescription;
 	}
 
 	public BigDecimal getPrice() {
@@ -200,6 +203,14 @@ public class ProductEntity extends BaseEntity implements Serializable {
 
 	public void setPrice(BigDecimal price) {
 		this.price = price;
+	}
+
+	public String getServiceId() {
+		return serviceId;
+	}
+
+	public void setServiceId(String serviceId) {
+		this.serviceId = serviceId;
 	}
 
 }

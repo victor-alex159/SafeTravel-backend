@@ -26,7 +26,11 @@ public class ProductJpaRepositoryImpl implements ProductJpaRepositoryCustom {
 			queryStr.append(" pd.end_date BETWEEN :startDate AND :endDate AND");
 		}
 		
-		queryStr.append(" pd.deleted=false AND pd.deleted=false;");
+		if(productBean.getServiceId() != null) {
+			queryStr.append(" pd.service_id LIKE CONCAT('%',:codesServices,'%') AND ");
+		}
+		
+		queryStr.append(" pd.deleted=false ");
 		Query query = em.createNativeQuery(queryStr.toString());
 		
 		if(productBean.getName() != null && !productBean.getName().isEmpty()) {
@@ -38,6 +42,9 @@ public class ProductJpaRepositoryImpl implements ProductJpaRepositoryCustom {
 			query.setParameter("endDate", productBean.getEndDateRequest());
 		}
 		
+		if(productBean.getServiceId() != null) {
+			query.setParameter("codesServices", "%" + productBean.getServiceId() + "%");
+		}
 		
 		return query.getResultList();
 	}

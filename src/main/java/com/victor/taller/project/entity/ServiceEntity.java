@@ -27,6 +27,9 @@ public class ServiceEntity extends BaseEntity implements Serializable {
 
 	@Column(name = "description")
 	private String description;
+	
+	@Column(name = "code")
+	private String code;
 
 	public Integer getId() {
 		return id;
@@ -42,6 +45,14 @@ public class ServiceEntity extends BaseEntity implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 }
