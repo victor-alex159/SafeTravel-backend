@@ -11,7 +11,7 @@
 		
 		<listeners>
 			<listener>
-				<class>com.victor.taller.project.CacheEventLogger</class>
+				<class>com.safetravel.taller.project.CacheEventLogger</class>
 				<event-firing-mode>ASYNCHRONOUS</event-firing-mode>
 				<event-ordering-mode>UNORDERED</event-ordering-mode>
 				<events-to-fire-on>CREATED</events-to-fire-on>
