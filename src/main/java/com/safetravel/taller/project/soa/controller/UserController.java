@@ -81,7 +81,7 @@ public class UserController {
 			bodyHtml.append("<table style='font-family: arial, sans-serif;border-collapse: collapse;width: 100%;'><tr><th style='border: 1px solid #dddddd;text-align: left;padding: 8px;'>Mensaje</th><th style='border: 1px solid #dddddd;text-align: left;padding: 8px;'>Link</th></tr>");
 			bodyHtml.append("<tr><td style='border: 1px solid #dddddd;text-align: left;padding: 8px;'>Haga click en el siguiente enlace</td><td style='border: 1px solid #dddddd;text-align: left;padding: 8px;'>");
 			//bodyHtml.append("http://localhost:4200/us/reset_password/" + token);
-			bodyHtml.append("https://safetravelpe.herokuapp.com/us/reset_password/" + token);
+			bodyHtml.append("https://safetravelpe.web.app/us/reset_password/" + token);
 			bodyHtml.append("</td></tr></table>");
 			
 			MailUtil.sendEmail(user.getEmail(),"Restablecer contraseña", null, bodyHtml.toString());
