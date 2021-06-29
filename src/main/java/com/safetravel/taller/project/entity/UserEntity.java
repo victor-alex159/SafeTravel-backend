@@ -65,6 +65,9 @@ public class UserEntity extends BaseEntity implements Serializable {
 
 	@Column(name = "phone")
 	private String phone;
+	
+	@Column(name = "photo")
+	private byte[] photo;
 
 	@Column(name = "organization_id")
 	private Integer organizationId;
@@ -199,5 +202,14 @@ public class UserEntity extends BaseEntity implements Serializable {
 	public void setTokenResetPassword(String tokenResetPassword) {
 		this.tokenResetPassword = tokenResetPassword;
 	}
+
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
+
 
 }

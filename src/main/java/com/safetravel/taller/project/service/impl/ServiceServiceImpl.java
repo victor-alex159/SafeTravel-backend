@@ -19,6 +19,18 @@ public class ServiceServiceImpl implements ServiceService {
 	private ServiceJpaRepository serviceJpaRepository;
 	
 	@Override
+	public ServiceBean saveService(ServiceBean serviceBean) {
+		ServiceEntity serviceEntity = new ServiceEntity();
+		if(serviceBean != null) {
+			BeanUtils.copyProperties(serviceBean, serviceEntity);
+			serviceEntity = serviceJpaRepository.save(serviceEntity);
+			serviceBean.setId(serviceEntity.getId());
+		}
+		
+		return serviceBean;
+	}
+		
+	@Override
 	public List<ServiceBean> getAllServices() {
 		List<ServiceEntity> listResult = (List<ServiceEntity>) serviceJpaRepository.findAll();
 		List<ServiceBean> result = new ArrayList<>();
@@ -29,6 +41,17 @@ public class ServiceServiceImpl implements ServiceService {
 				result.add(serviceBean);
 			});
 			return result;
+		}
+		return null;
+	}
+
+	@Override
+	public ServiceBean getServiceById(Integer id) {
+		ServiceEntity serviceEntity = serviceJpaRepository.getServiceById(id);
+		ServiceBean serviceBean = new ServiceBean();
+		if(serviceEntity != null) {
+			BeanUtils.copyProperties(serviceEntity, serviceBean);
+			return serviceBean;
 		}
 		return null;
 	}

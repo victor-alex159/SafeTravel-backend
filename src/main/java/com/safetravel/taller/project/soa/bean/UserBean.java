@@ -19,6 +19,7 @@ public class UserBean extends BaseBean {
 	private String password;
 	private String email;
 	private String phone;
+	private byte[] photo;
 	private String tokenResetPassword;
 
 	public Integer getId() {
@@ -148,4 +149,13 @@ public class UserBean extends BaseBean {
 	public void setTokenResetPassword(String tokenResetPassword) {
 		this.tokenResetPassword = tokenResetPassword;
 	}
+
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
+
 }

@@ -169,7 +169,7 @@ public class ProductController {
 		return response;
 	}
 	
-	/*@RequestMapping(value = "/sv", method = RequestMethod.POST)
+	@RequestMapping(value = "/sv", method = RequestMethod.POST)
 	public GenericResponse<ProductBean> save(@RequestPart("product") ProductBean productBean, @RequestPart("file") MultipartFile file) throws IOException {
 		logger.info("ProductController.saveProduct()");
 		GenericResponse<ProductBean> response = new GenericResponse<>();
@@ -187,7 +187,7 @@ public class ProductController {
 		product = productService.saveProduct(productAux);
 		response.setData(product);
 		return response;
-	}*/
+	}
 	
 	@RequestMapping(value = "/gi/{productId}", method = RequestMethod.POST)
 	public GenericResponse<byte[]> getImage(@PathVariable("productId") Integer productId) {
@@ -199,6 +199,7 @@ public class ProductController {
 		response.setData(imageData);
 		return response;
 	}
+	
 	@RequestMapping(value = "/gpbnad", method = RequestMethod.POST)
 	public GenericResponse<List<Map<String, Object>>> getProductByNameAndDates(@RequestBody GenericRequest<ProductBean> request) {
 		logger.info("ProductController.getProductByNameAndDates()");

@@ -29,7 +29,11 @@ public class UserServiceImpl implements UserService {
 	public UserBean saveUser(UserBean userBean) {
 		UserEntity userEntity = new UserEntity();
 		BeanUtils.copyProperties(userBean, userEntity);
-		userEntity.setPassword(bcrypt.encode(userBean.getPassword()));
+		if(userBean.getId() == null) {
+			userEntity.setPassword(bcrypt.encode(userBean.getPassword()));			
+		} else {
+			userEntity.setPassword((userBean.getPassword()));
+		}
 		//userEntity.setPassword(EncryptUtil.encryptMD5(userBean.getPassword()));
 		userEntity.setProfile(new ProfileEntity());
 		userEntity.getProfile().setId(userBean.getProfile().getId());
@@ -43,11 +47,16 @@ public class UserServiceImpl implements UserService {
 	public UserBean getUserById(Integer id) {
 		UserEntity userEntity = userRepository.findById(id).orElse(null);
 		UserBean userBean = new UserBean();
-		BeanUtils.copyProperties(userEntity, userBean);
-		userBean.setProfile(new ProfileBean());
-		userBean.getProfile().setId(userEntity.getProfile().getId());
+		if(userEntity != null) {
+			BeanUtils.copyProperties(userEntity, userBean);
+			userBean.setProfile(new ProfileBean());
+			userBean.getProfile().setId(userEntity.getProfile().getId());
+			userBean.getProfile().setLongDescription(userEntity.getProfile().getLongDescription());
+			userBean.getProfile().setType(userEntity.getProfile().getType());
+			return userBean;
+		}
 		
-		return userBean;
+		return null;
 	}
 
 	@Override
@@ -91,12 +100,14 @@ public class UserServiceImpl implements UserService {
 		List<UserEntity> listUsersEntity = (List<UserEntity>) userRepository.findAll();
 		List<UserBean> listUserBean = new ArrayList<>();
 		if(listUsersEntity != null) {
-			UserBean userBean = new UserBean();
 			listUsersEntity.forEach(userEntity -> {
+				UserBean userBean = new UserBean();
 				BeanUtils.copyProperties(userEntity, userBean);
 				if(userEntity.getProfile() != null) {
 					userBean.setProfile(new ProfileBean());
 					userBean.getProfile().setId(userEntity.getProfile().getId());
+					userBean.getProfile().setLongDescription(userEntity.getProfile().getLongDescription());
+					userBean.getProfile().setType(userEntity.getProfile().getType());
 				}
 				listUserBean.add(userBean);
 			});

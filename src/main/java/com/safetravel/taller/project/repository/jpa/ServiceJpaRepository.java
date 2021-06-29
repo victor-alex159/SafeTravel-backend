@@ -16,4 +16,7 @@ public interface ServiceJpaRepository extends PagingAndSortingRepository<Service
 	@Query("select ser from ServiceEntity ser where ser.code in(:code)")
 	public List<ServiceEntity> getListServiceByCodes(@Param("code") List<String> code);
 	
+	@Query("select ser from ServiceEntity ser where ser.id=:id")
+	public ServiceEntity getServiceById(@Param("id") Integer id);
+	
 }

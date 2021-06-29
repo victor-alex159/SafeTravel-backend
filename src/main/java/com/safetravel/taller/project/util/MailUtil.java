@@ -24,9 +24,9 @@ public class MailUtil {
 
 	
 	public static void sendEmail(String emailTo, String subject, String text, String bodyHtml) {
-		logger.info("Start MailUtil.sendEmail()");
-		String fromEmail = "alexbenavente322@gmail.com"; // Para permitir enviar correo https://myaccount.google.com/lesssecureapps
-		String password = "";
+		logger.info("*****Enviando email*****");
+		String fromEmail = "safetraveldev@gmail.com"; // Para permitir enviar correo https://myaccount.google.com/lesssecureapps
+		String password = "safetravel123";
 		
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -57,7 +57,7 @@ public class MailUtil {
 			}
 	        
 			Transport.send(message);
-			logger.info("End MailUtil.sendEmail()");
+			logger.info("*****Email enviado*****");
 	        
 		} catch(Exception me) {
 			me.printStackTrace();
