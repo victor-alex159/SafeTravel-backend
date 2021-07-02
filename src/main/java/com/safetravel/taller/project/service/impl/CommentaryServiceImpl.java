@@ -55,6 +55,10 @@ public class CommentaryServiceImpl implements CommentaryService {
 				if(commentaryEntity.getUserCreateId() != null) {
 					UserBean user = userService.getUserById(commentaryEntity.getUserCreateId());
 					commentaryBean.setUsername(user.getUsername());
+					if(user.getPhoto() != null) {
+						commentaryBean.setUserPhoto(user.getPhoto());						
+					}
+					commentaryBean.setGenderTypeId(user.getGenderTypeId());
 				}
 				result.add(commentaryBean);
 			});

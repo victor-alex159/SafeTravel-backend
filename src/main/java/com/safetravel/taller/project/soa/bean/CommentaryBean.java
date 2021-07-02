@@ -8,6 +8,8 @@ public class CommentaryBean extends BaseBean {
 	private ProductBean product;
 	private String description;
 	private String username;
+	private byte[] userPhoto;
+	private String genderTypeId;
 
 	public Integer getId() {
 		return id;
@@ -39,5 +41,21 @@ public class CommentaryBean extends BaseBean {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public byte[] getUserPhoto() {
+		return userPhoto;
+	}
+
+	public void setUserPhoto(byte[] userPhoto) {
+		this.userPhoto = userPhoto;
+	}
+
+	public String getGenderTypeId() {
+		return genderTypeId;
+	}
+
+	public void setGenderTypeId(String genderTypeId) {
+		this.genderTypeId = genderTypeId;
 	}
 }

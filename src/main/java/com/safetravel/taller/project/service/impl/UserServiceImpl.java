@@ -63,10 +63,13 @@ public class UserServiceImpl implements UserService {
 	public UserBean getUserByUsername(String username) {
 		UserEntity userEntity = userRepository.findByUsername(username);
 		UserBean userBean = new UserBean();
-		BeanUtils.copyProperties(userEntity, userBean);
-		userBean.setProfile(new ProfileBean());
-		userBean.getProfile().setId(userEntity.getProfile().getId());
-		return userBean;
+		if(userEntity != null) {
+			BeanUtils.copyProperties(userEntity, userBean);			
+			userBean.setProfile(new ProfileBean());
+			userBean.getProfile().setId(userEntity.getProfile().getId());
+			return userBean;
+		}
+		return null;
 	}
 
 	@Override
