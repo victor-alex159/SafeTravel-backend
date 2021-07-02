@@ -2,6 +2,7 @@ package com.safetravel.taller.project.repository.jpa;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -13,9 +14,16 @@ public interface ProductJpaRepository extends PagingAndSortingRepository<Product
 	@Query("SELECT p FROM ProductEntity p inner join p.organization org where org.id =:organizationId and p.deleted=false and org.deleted=false")	
 	public List<ProductEntity> getProductsByUserPrincipal(@Param("organizationId") Integer organizationId);
 	
+	@Query("SELECT p FROM ProductEntity p inner join p.organization org WHERE p.id=:productId and p.deleted=false and org.deleted=false")
+	public ProductEntity getProductById(@Param("productId") Integer productId);
+	
 	@Query("SELECT p FROM ProductEntity p inner join p.organization org WHERE p.type=:type and p.deleted=false and org.deleted=false")
 	public List<ProductEntity> getProductByType(@Param("type") String type);
 	
 	@Query("SELECT p FROM ProductEntity p inner join p.organization org WHERE p.deleted=false and org.deleted=false")
 	public List<ProductEntity> getAllProducts();
+	
+	@Modifying
+	@Query("UPDATE ProductEntity p SET p.deleted=true WHERE p.id=:id")
+	public void delete(@Param("id") Integer id);
 }

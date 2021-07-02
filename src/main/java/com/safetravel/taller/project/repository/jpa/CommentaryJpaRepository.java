@@ -10,7 +10,7 @@ import com.safetravel.taller.project.entity.CommentaryEntity;
 
 public interface CommentaryJpaRepository extends PagingAndSortingRepository<CommentaryEntity, Integer>, CommentaryJpaRepositoryCustom {
 
-	@Query("SELECT c FROM CommentaryEntity c WHERE c.product.id =:productId AND c.deleted=false order by 1 desc")
+	@Query("SELECT c FROM CommentaryEntity c inner join c.product pr WHERE pr.id =:productId AND c.deleted=false AND pr.deleted=false order by 1 desc")
 	public List<CommentaryEntity> getCommentaryByProductId(@Param("productId") Integer productId);
 	
 }

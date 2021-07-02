@@ -51,4 +51,12 @@ public class ServiceController {
 		response.setData(serviceBean);
 		return response;
 	}
+	
+	@RequestMapping(value = "/ds", method = RequestMethod.POST)
+	public GenericResponse<ServiceBean> deleteProduct(@RequestBody GenericRequest<ServiceBean> request) {
+		logger.info("ProductController.deleteProduct()");
+		GenericResponse<ServiceBean> response = new GenericResponse<>();
+		serviceService.deleteService(request.getData().getId());
+		return response;
+	}
 }

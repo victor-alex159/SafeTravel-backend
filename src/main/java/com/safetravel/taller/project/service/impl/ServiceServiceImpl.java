@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.safetravel.taller.project.entity.ServiceEntity;
 import com.safetravel.taller.project.repository.jpa.ServiceJpaRepository;
@@ -13,6 +14,7 @@ import com.safetravel.taller.project.service.ServiceService;
 import com.safetravel.taller.project.soa.bean.ServiceBean;
 
 @Service
+@Transactional
 public class ServiceServiceImpl implements ServiceService {
 
 	@Autowired
@@ -54,6 +56,14 @@ public class ServiceServiceImpl implements ServiceService {
 			return serviceBean;
 		}
 		return null;
+	}
+
+	@Override
+	public void deleteService(Integer id) {
+		if(id != null) {
+			serviceJpaRepository.delete(id);
+		}
+		
 	}
 
 }

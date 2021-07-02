@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.safetravel.taller.project.entity.OrganizationEntity;
 import com.safetravel.taller.project.entity.ProductEntity;
@@ -17,6 +18,7 @@ import com.safetravel.taller.project.soa.bean.OrganizationBean;
 import com.safetravel.taller.project.soa.bean.ProductBean;
 
 @Service
+@Transactional
 public class ProductServiceImpl implements ProductService {
 	
 	@Autowired
@@ -57,15 +59,17 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public ProductBean getProductById(Integer productId) {
-		ProductEntity productEntity = productRepository.findById(productId).orElse(null);
+		ProductEntity productEntity = productRepository.getProductById(productId);
 		ProductBean productBean = new ProductBean();
-		BeanUtils.copyProperties(productEntity, productBean);
-		if(productEntity.getOrganization() != null) {
-			productBean.setOrganization(new OrganizationBean());
-			productBean.getOrganization().setId(productEntity.getOrganization().getId());
+		if(productEntity != null) {
+			BeanUtils.copyProperties(productEntity, productBean);
+			if(productEntity.getOrganization() != null) {
+				productBean.setOrganization(new OrganizationBean());
+				productBean.getOrganization().setId(productEntity.getOrganization().getId());
+			}
+			return productBean;
 		}
-		
-		return productBean;
+		return null;
 	}
 
 	@Override
@@ -126,6 +130,13 @@ public class ProductServiceImpl implements ProductService {
 		}
 		
 		return null;
+	}
+	
+	@Override
+	public void deleteProduct(Integer productId) {
+		if(productId != null) {
+			productRepository.delete(productId);
+		}
 	}
 
 }

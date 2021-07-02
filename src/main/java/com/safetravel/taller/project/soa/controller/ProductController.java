@@ -5,9 +5,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -20,12 +17,6 @@ import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -206,6 +197,14 @@ public class ProductController {
 		GenericResponse<List<Map<String, Object>>> response = new GenericResponse<>();
 		List<Map<String, Object>> productList= productService.getProductByNameAndDates(request.getData());
 		response.setData(productList);
+		return response;
+	}
+	
+	@RequestMapping(value = "/dp", method = RequestMethod.POST)
+	public GenericResponse<ProductBean> deleteProduct(@RequestBody GenericRequest<ProductBean> request) {
+		logger.info("ProductController.deleteProduct()");
+		GenericResponse<ProductBean> response = new GenericResponse<>();
+		productService.deleteProduct(request.getData().getId());
 		return response;
 	}
 	
