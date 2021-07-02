@@ -30,7 +30,11 @@ public class UserServiceImpl implements UserService {
 		UserEntity userEntity = new UserEntity();
 		BeanUtils.copyProperties(userBean, userEntity);
 		if(userBean.getId() == null) {
-			userEntity.setPassword(bcrypt.encode(userBean.getPassword()));			
+			if(userBean.getPassword() != null) {
+				userEntity.setPassword(bcrypt.encode(userBean.getPassword()));							
+			} else {
+				userEntity.setPassword(bcrypt.encode(userBean.getDocumentNumber()));										
+			}
 		} else {
 			userEntity.setPassword((userBean.getPassword()));
 		}
