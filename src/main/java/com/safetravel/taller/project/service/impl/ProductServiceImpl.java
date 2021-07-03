@@ -121,9 +121,11 @@ public class ProductServiceImpl implements ProductService {
 				map.put("image", response[2]);
 				map.put("description", response[3]);
 				map.put("price", response[4]);
-				map.put("ubication", response[5]);
-				map.put("startDate", response[6]);
-				map.put("endDate", response[7]);
+				map.put("price_min", response[5]);
+				map.put("price_max", response[6]);
+				map.put("ubication", response[7]);
+				map.put("startDate", response[8]);
+				map.put("endDate", response[9]);
 				result.add(map);
 			});
 			return result;

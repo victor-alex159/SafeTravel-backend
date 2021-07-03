@@ -74,7 +74,13 @@ public class ProductEntity extends BaseEntity implements Serializable {
 	private BigDecimal price;
 	
 	@Column(name = "service_id")
-	private String serviceId; 
+	private String serviceId;
+	
+	@Column(name = "price_min")
+	private String priceMin;
+	
+	@Column(name = "price_max")
+	private String priceMax;
 
 	public Integer getId() {
 		return id;
@@ -211,6 +217,22 @@ public class ProductEntity extends BaseEntity implements Serializable {
 
 	public void setServiceId(String serviceId) {
 		this.serviceId = serviceId;
+	}
+
+	public String getPriceMin() {
+		return priceMin;
+	}
+
+	public void setPriceMin(String priceMin) {
+		this.priceMin = priceMin;
+	}
+
+	public String getPriceMax() {
+		return priceMax;
+	}
+
+	public void setPriceMax(String priceMax) {
+		this.priceMax = priceMax;
 	}
 
 }

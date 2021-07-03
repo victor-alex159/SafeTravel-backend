@@ -24,6 +24,8 @@ public class ProductBean extends BaseBean {
 	private String longDescription;
 	private BigDecimal price;
 	private String serviceId;
+	private String priceMin;
+	private String priceMax;
 	
 	public Integer getId() {
 		return id;
@@ -175,6 +177,22 @@ public class ProductBean extends BaseBean {
 
 	public void setServiceId(String serviceId) {
 		this.serviceId = serviceId;
+	}
+
+	public String getPriceMin() {
+		return priceMin;
+	}
+
+	public void setPriceMin(String priceMin) {
+		this.priceMin = priceMin;
+	}
+
+	public String getPriceMax() {
+		return priceMax;
+	}
+
+	public void setPriceMax(String priceMax) {
+		this.priceMax = priceMax;
 	}
 
 }
