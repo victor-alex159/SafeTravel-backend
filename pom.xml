@@ -9,7 +9,7 @@
 		<version>2.3.6.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.victor.taller.project</groupId>
+	<groupId>com.safetravel.taller.project</groupId>
 	<artifactId>Taller-project</artifactId>
 	<version>0.0.1</version>
 	<name>Taller-project</name>

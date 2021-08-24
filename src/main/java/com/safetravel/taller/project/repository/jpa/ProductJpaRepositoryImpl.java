@@ -15,7 +15,7 @@ public class ProductJpaRepositoryImpl implements ProductJpaRepositoryCustom {
 	
 	@Override
 	public List<Object[]> getProductByNameAndDates(ProductBean productBean) {
-		StringBuffer queryStr = new StringBuffer("SELECT pd.id, pd.name, pd.image, pd.long_description, pd.price, pd.price_min, pd_price_max, pd.ubication, pd.start_date, pd.end_date FROM product pd ");
+		StringBuffer queryStr = new StringBuffer("SELECT pd.id, pd.name, pd.image, pd.long_description, pd.price, pd.price_min, pd.price_max, pd.ubication, pd.start_date, pd.end_date FROM product pd ");
 		queryStr.append(" inner join organization org ON pd.organization_id=org.id WHERE ");
 		
 		if(productBean.getName() != null && !productBean.getName().isEmpty()) {
