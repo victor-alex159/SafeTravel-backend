@@ -208,5 +208,22 @@ public class ProductController {
 		return response;
 	}
 	
+	@RequestMapping(value = "/gapd", method = RequestMethod.POST)
+	public GenericResponse<ProductBean> getAllProductsDisabled(@RequestBody GenericRequest<ProductBean> request) {
+		logger.info("ProductController.getAllProductsDisabled()");
+		GenericResponse<ProductBean> response = new GenericResponse<>();
+		List<ProductBean> productList = productService.getProductsDisabled();
+		response.setDatalist(productList);
+		return response;
+	}
+	
+	@RequestMapping(value = "/uep", method = RequestMethod.POST)
+	public GenericResponse<ProductBean> updateStatusProduct(@RequestBody GenericRequest<ProductBean> request) {
+		logger.info("ProductController.updateStatusProduct()");
+		GenericResponse<ProductBean> response = new GenericResponse<>();
+		productService.updateStatus(request.getData().getId());
+		return response;
+	}
+	
 	
 }
