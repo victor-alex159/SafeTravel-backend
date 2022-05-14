@@ -3,6 +3,8 @@ package com.safetravel.taller.project.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import com.safetravel.taller.project.soa.bean.ProductBean;
 
 public interface ProductService {
@@ -16,4 +18,5 @@ public interface ProductService {
 	abstract List<ProductBean> getProductsDisabled();
 	abstract void deleteProduct(Integer productId);
 	abstract void updateStatus(Integer productId);
+	abstract XSSFWorkbook generateReportExcel() throws Exception;
 }
