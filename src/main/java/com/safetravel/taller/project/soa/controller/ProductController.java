@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import com.safetravel.taller.project.util.UtilFunctions;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -65,7 +66,7 @@ public class ProductController {
 		ProductBean productAux = new ProductBean();
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserBean user = userService.getUserByUsername(principal.toString());
-		if(user.getOrganizationId() != null) {
+		if(UtilFunctions.noEsNulo(user.getOrganizationId())) {
 			product.setOrganization(new OrganizationBean());
 			product.getOrganization().setId(user.getOrganizationId());			
 		}
@@ -145,7 +146,7 @@ public class ProductController {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserBean user = userService.getUserByUsername(principal.toString());
 		List<ProductBean> productList = null;
-		if(user.getOrganizationId() != null) {
+		if(UtilFunctions.noEsNulo(user.getOrganizationId())) {
 			productList = productService.getProductsByUserPrincipal(user.getOrganizationId());			
 		}
 		response.setDatalist(productList);
@@ -179,7 +180,7 @@ public class ProductController {
 		ProductBean productAux = productBean;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserBean user = userService.getUserByUsername(principal.toString());
-		if(user.getOrganizationId() != null) {
+		if(UtilFunctions.noEsNulo(user.getOrganizationId())) {
 			productAux.setOrganization(new OrganizationBean());
 			productAux.getOrganization().setId(user.getOrganizationId());			
 		}
@@ -281,7 +282,7 @@ public class ProductController {
 	public void downloadFile(@RequestBody GenericRequest<ProductBean> request, final HttpServletResponse response) throws IOException {
 		logger.info("ProductController.downloadFile()");
 		String pathFile = "c:/Users/ALEX/Desktop/test/Pantallazos de lo que se explicó durante la entrevista.pdf";
-		if(pathFile != null) {
+		if(UtilFunctions.noEsNulo(pathFile)) {
 			File file = new File(pathFile);
 			if(file.exists()) {
 				Path path = Paths.get(pathFile);
@@ -300,7 +301,7 @@ public class ProductController {
 	public void downloadZip(@RequestBody GenericRequest<ProductBean> request, final HttpServletResponse response) throws IOException {
 		logger.info("ProductController.downloadFile()");
 		String pathFile = "c:/Users/ALEX/Desktop/test/test.zip";
-		if(pathFile != null) {
+		if(UtilFunctions.noEsNulo(pathFile)) {
 			File file = new File(pathFile);
 			if(file.exists()) {
 				response.setContentType("application/zip");

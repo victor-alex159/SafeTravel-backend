@@ -3,6 +3,7 @@ package com.safetravel.taller.project.soa.controller;
 import java.io.IOException;
 import java.util.List;
 
+import com.safetravel.taller.project.util.UtilFunctions;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -71,7 +72,7 @@ public class UserController {
 		logger.info("UserController.sendCodeVerificationForPassword()");
 		GenericResponse response = new GenericResponse();
 		UserBean user = userService.getUserByEmail(request.getData().getEmail());
-		if(user != null) {
+		if(UtilFunctions.noEsNulo(user)) {
 			String token = bcrypt.encode(RandomStringUtils.randomAlphanumeric(10)).replace("/", "").replace(".", "");
 			user.setTokenResetPassword(token);
 			userService.saveUser(user);
@@ -95,7 +96,7 @@ public class UserController {
 		logger.info("UserController.changePassword()");
 		GenericResponse response = new GenericResponse();
 		UserBean userRequest = request.getData();
-		if(userRequest.getId() != null) {
+		if(UtilFunctions.noEsNulo(userRequest.getId())) {
 			UserBean user = userService.getUserById(userRequest.getId());
 			user.setPassword(userRequest.getPassword());
 			userService.saveUser(user);
@@ -110,7 +111,7 @@ public class UserController {
 		GenericResponse response = new GenericResponse();
 		UserBean userRequest = request.getData();
 		UserBean user = userService.getUserByTokenResetPassword(tokenPassword);
-		if(user != null) {
+		if(UtilFunctions.noEsNulo(user)) {
 			user.setPassword(userRequest.getPassword());
 			user.setTokenResetPassword(null);
 			logger.info("SaveUser changePasswordWithToken()");

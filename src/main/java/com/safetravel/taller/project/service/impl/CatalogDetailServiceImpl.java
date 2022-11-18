@@ -3,6 +3,7 @@ package com.safetravel.taller.project.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.safetravel.taller.project.util.UtilFunctions;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,11 +24,11 @@ public class CatalogDetailServiceImpl implements CatalogDetailService {
 	public List<CatalogDetailBean> getListCatalogDetailByCatalogId(CatalogDetailBean catalogDetailBean) {
 		List<CatalogDetailBean> result = new ArrayList<>();
 		List<CatalogDetailEntity> list = catalogDetailRepository.getListCatalogDetailByCatalogId(catalogDetailBean.getCatalog().getId());
-		if(list != null) {
+		if(UtilFunctions.noEsNulo(list)) {
 			list.forEach(catalogDetailEntity -> {
 				CatalogDetailBean cdBean = new CatalogDetailBean();
 				BeanUtils.copyProperties(catalogDetailEntity, cdBean);
-				if(catalogDetailEntity.getCatalog() != null) {
+				if(UtilFunctions.noEsNulo(catalogDetailEntity.getCatalog())) {
 					cdBean.setCatalog(new CatalogBean());
 					cdBean.getCatalog().setId(catalogDetailEntity.getCatalog().getId());
 				}

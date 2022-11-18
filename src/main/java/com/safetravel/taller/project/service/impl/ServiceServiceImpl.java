@@ -3,6 +3,7 @@ package com.safetravel.taller.project.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.safetravel.taller.project.util.UtilFunctions;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class ServiceServiceImpl implements ServiceService {
 	@Override
 	public ServiceBean saveService(ServiceBean serviceBean) {
 		ServiceEntity serviceEntity = new ServiceEntity();
-		if(serviceBean != null) {
+		if(UtilFunctions.noEsNulo(serviceBean)) {
 			BeanUtils.copyProperties(serviceBean, serviceEntity);
 			serviceEntity = serviceJpaRepository.save(serviceEntity);
 			serviceBean.setId(serviceEntity.getId());
@@ -36,7 +37,7 @@ public class ServiceServiceImpl implements ServiceService {
 	public List<ServiceBean> getAllServices() {
 		List<ServiceEntity> listResult = (List<ServiceEntity>) serviceJpaRepository.findAll();
 		List<ServiceBean> result = new ArrayList<>();
-		if(listResult != null) {
+		if(UtilFunctions.noEsNulo(listResult)) {
 			listResult.forEach(serviceEntity -> {
 				ServiceBean serviceBean = new ServiceBean();
 				BeanUtils.copyProperties(serviceEntity, serviceBean);
@@ -51,7 +52,7 @@ public class ServiceServiceImpl implements ServiceService {
 	public ServiceBean getServiceById(Integer id) {
 		ServiceEntity serviceEntity = serviceJpaRepository.getServiceById(id);
 		ServiceBean serviceBean = new ServiceBean();
-		if(serviceEntity != null) {
+		if(UtilFunctions.noEsNulo(serviceEntity)) {
 			BeanUtils.copyProperties(serviceEntity, serviceBean);
 			return serviceBean;
 		}
@@ -60,7 +61,7 @@ public class ServiceServiceImpl implements ServiceService {
 
 	@Override
 	public void deleteService(Integer id) {
-		if(id != null) {
+		if(UtilFunctions.noEsNulo(id)) {
 			serviceJpaRepository.delete(id);
 		}
 		

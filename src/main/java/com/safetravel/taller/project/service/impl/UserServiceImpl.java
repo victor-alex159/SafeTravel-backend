@@ -3,6 +3,7 @@ package com.safetravel.taller.project.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.safetravel.taller.project.util.UtilFunctions;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -29,8 +30,8 @@ public class UserServiceImpl implements UserService {
 	public UserBean saveUser(UserBean userBean) {
 		UserEntity userEntity = new UserEntity();
 		BeanUtils.copyProperties(userBean, userEntity);
-		if(userBean.getId() == null) {
-			if(userBean.getPassword() != null) {
+		if(UtilFunctions.esNulo(userBean.getId())) {
+			if(UtilFunctions.noEsNulo(userBean.getPassword())) {
 				userEntity.setPassword(bcrypt.encode(userBean.getPassword()));							
 			} else {
 				userEntity.setPassword(bcrypt.encode(userBean.getDocumentNumber()));										
@@ -51,7 +52,7 @@ public class UserServiceImpl implements UserService {
 	public UserBean getUserById(Integer id) {
 		UserEntity userEntity = userRepository.findById(id).orElse(null);
 		UserBean userBean = new UserBean();
-		if(userEntity != null) {
+		if(UtilFunctions.noEsNulo(userEntity)) {
 			BeanUtils.copyProperties(userEntity, userBean);
 			userBean.setProfile(new ProfileBean());
 			userBean.getProfile().setId(userEntity.getProfile().getId());
@@ -67,7 +68,7 @@ public class UserServiceImpl implements UserService {
 	public UserBean getUserByUsername(String username) {
 		UserEntity userEntity = userRepository.findByUsername(username);
 		UserBean userBean = new UserBean();
-		if(userEntity != null) {
+		if(UtilFunctions.noEsNulo(userEntity)) {
 			BeanUtils.copyProperties(userEntity, userBean);			
 			userBean.setProfile(new ProfileBean());
 			userBean.getProfile().setId(userEntity.getProfile().getId());
@@ -80,7 +81,7 @@ public class UserServiceImpl implements UserService {
 	public UserBean getUserByEmail(String email) {
 		UserEntity userEntity = userRepository.findUserByEmail(email);
 		UserBean userBean = new UserBean();
-		if(userEntity != null) {
+		if(UtilFunctions.noEsNulo(userEntity)) {
 			BeanUtils.copyProperties(userEntity, userBean);
 			userBean.setProfile(new ProfileBean());
 			userBean.getProfile().setId(userEntity.getProfile().getId());
@@ -93,7 +94,7 @@ public class UserServiceImpl implements UserService {
 	public UserBean getUserByTokenResetPassword(String tokenResetPassword) {
 		UserEntity userEntity = userRepository.findUserByTokenResetPassword(tokenResetPassword);
 		UserBean userBean = new UserBean();
-		if(userEntity != null) {
+		if(UtilFunctions.noEsNulo(userEntity)) {
 			BeanUtils.copyProperties(userEntity, userBean);
 			userBean.setProfile(new ProfileBean());
 			userBean.getProfile().setId(userEntity.getProfile().getId());
@@ -106,11 +107,11 @@ public class UserServiceImpl implements UserService {
 	public List<UserBean> getAllUsers() {
 		List<UserEntity> listUsersEntity = (List<UserEntity>) userRepository.findAll();
 		List<UserBean> listUserBean = new ArrayList<>();
-		if(listUsersEntity != null) {
+		if(UtilFunctions.noEsNulo(listUsersEntity)) {
 			listUsersEntity.forEach(userEntity -> {
 				UserBean userBean = new UserBean();
 				BeanUtils.copyProperties(userEntity, userBean);
-				if(userEntity.getProfile() != null) {
+				if(UtilFunctions.noEsNulo(userEntity.getProfile())) {
 					userBean.setProfile(new ProfileBean());
 					userBean.getProfile().setId(userEntity.getProfile().getId());
 					userBean.getProfile().setLongDescription(userEntity.getProfile().getLongDescription());

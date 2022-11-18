@@ -3,6 +3,7 @@ package com.safetravel.taller.project.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.safetravel.taller.project.util.UtilFunctions;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,7 @@ public class OrganizationServiceImpl implements OrganizationService {
 	public List<OrganizationBean> getAllOrganization() {
 		List<OrganizationBean> result = new ArrayList<OrganizationBean>();
 		Iterable<OrganizationEntity> list = organizationRepository.findAll();
-		if(list != null) {
+		if(UtilFunctions.noEsNulo(list)) {
 			list.forEach(organizationEntity -> {
 				OrganizationBean orgBean = new OrganizationBean();
 				BeanUtils.copyProperties(organizationEntity, orgBean);
@@ -46,7 +47,7 @@ public class OrganizationServiceImpl implements OrganizationService {
 
 	@Override
 	public void deletedOrganization(Integer organizationId) {
-		if(organizationId != null) {
+		if(!UtilFunctions.esNulo(organizationId)) {
 			organizationRepository.delete(organizationId);
 		}
 		

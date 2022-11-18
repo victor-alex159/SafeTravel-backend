@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.safetravel.taller.project.util.UtilFunctions;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -42,7 +43,7 @@ public class ProductServiceImpl implements ProductService {
 	public ProductBean saveProduct(ProductBean productBean) {
 		ProductEntity productEntity = new ProductEntity();
 		BeanUtils.copyProperties(productBean, productEntity);
-		if(productBean.getOrganization() != null) {
+		if(UtilFunctions.noEsNulo(productBean.getOrganization())) {
 			productEntity.setOrganization(new OrganizationEntity());
 			productEntity.getOrganization().setId(productBean.getOrganization().getId());			
 		}
@@ -56,11 +57,11 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProductBean> getAllProducts() {
 		List<ProductBean> result = new ArrayList<>();
 		List<ProductEntity> list = productRepository.getAllProducts();
-		if(list != null) {
+		if(UtilFunctions.noEsNulo(list)) {
 			list.forEach(productEntity -> {
 				ProductBean productBean = new ProductBean();
 				BeanUtils.copyProperties(productEntity, productBean);
-				if(productEntity.getOrganization() != null) {
+				if(UtilFunctions.noEsNulo(productEntity.getOrganization())) {
 					productBean.setOrganization(new OrganizationBean());
 					productBean.getOrganization().setId(productEntity.getOrganization().getId());
 				}
@@ -75,9 +76,9 @@ public class ProductServiceImpl implements ProductService {
 	public ProductBean getProductById(Integer productId) {
 		ProductEntity productEntity = productRepository.getProductById(productId);
 		ProductBean productBean = new ProductBean();
-		if(productEntity != null) {
+		if(UtilFunctions.noEsNulo(productEntity)) {
 			BeanUtils.copyProperties(productEntity, productBean);
-			if(productEntity.getOrganization() != null) {
+			if(UtilFunctions.noEsNulo(productEntity.getOrganization())) {
 				productBean.setOrganization(new OrganizationBean());
 				productBean.getOrganization().setId(productEntity.getOrganization().getId());
 			}
@@ -90,11 +91,11 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProductBean> getProductsByUserPrincipal(Integer organizationId) {
 		List<ProductBean> result = new ArrayList<>();
 		List<ProductEntity> list = productRepository.getProductsByUserPrincipal(organizationId);
-		if(list != null) {
+		if(UtilFunctions.noEsNulo(list)) {
 			list.forEach(productEntity -> {
 				ProductBean productBean = new ProductBean();
 				BeanUtils.copyProperties(productEntity, productBean);
-				if(productEntity.getOrganization() != null) {
+				if(UtilFunctions.noEsNulo(productEntity.getOrganization())) {
 					productBean.setOrganization(new OrganizationBean());
 					productBean.getOrganization().setId(productEntity.getOrganization().getId());
 				}
@@ -109,11 +110,11 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProductBean> getProductByType(ProductBean productBean) {
 		List<ProductEntity> list = productRepository.getProductByType(productBean.getType());
 		List<ProductBean> result = new ArrayList<ProductBean>();
-		if(list != null) {
+		if(UtilFunctions.noEsNulo(list)) {
 			list.forEach(productEntity -> {
 				ProductBean prodBean = new ProductBean();
 				BeanUtils.copyProperties(productEntity, prodBean);
-				if(productEntity.getOrganization() != null) {
+				if(UtilFunctions.noEsNulo(productEntity.getOrganization())) {
 					prodBean.setOrganization(new OrganizationBean());
 					prodBean.getOrganization().setId(productEntity.getOrganization().getId());
 				}
@@ -126,7 +127,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<Map<String, Object>> getProductByNameAndDates(ProductBean productBean) {
 		List<Object[]> listResult = productRepository.getProductByNameAndDates(productBean);
-		if(listResult != null) {
+		if(UtilFunctions.noEsNulo(listResult)) {
 			List<Map<String, Object>> result = new ArrayList<>();
 			listResult.forEach(response -> {
 				Map<String, Object> map = new HashMap<>();
@@ -150,7 +151,7 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public void deleteProduct(Integer productId) {
-		if(productId != null) {
+		if(UtilFunctions.noEsNulo(productId)) {
 			productRepository.delete(productId);
 		}
 	}
@@ -159,11 +160,11 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProductBean> getProductsDisabled() {
 		List<ProductEntity> list = productRepository.getAllProductsDisabled();
 		List<ProductBean> result = new ArrayList<ProductBean>();
-		if(list != null) {
+		if(UtilFunctions.noEsNulo(list)) {
 			list.forEach(productEntity -> {
 				ProductBean productBean = new ProductBean();
 				BeanUtils.copyProperties(productEntity, productBean);
-				if(productEntity.getOrganization() != null) {
+				if(UtilFunctions.noEsNulo(productEntity.getOrganization())) {
 					productBean.setOrganization(new OrganizationBean());
 					productBean.getOrganization().setId(productEntity.getOrganization().getId());
 				}
@@ -176,7 +177,7 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public void updateStatus(Integer productId) {
-		if(productId != null) {
+		if(UtilFunctions.noEsNulo(productId)) {
 			productRepository.updateStatus(productId);
 		}
 		
@@ -185,7 +186,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public XSSFWorkbook generateReportExcel() throws IOException {
 		List<ProductEntity> listProducts = productRepository.getAllProducts();
-		if(listProducts != null) {
+		if(UtilFunctions.noEsNulo(listProducts)) {
 			XSSFWorkbook workbook = new XSSFWorkbook(this.getClass().getClassLoader().getResourceAsStream("files" + File.separator + "reporte-productos.xlsx" ));
 			XSSFSheet sheet = workbook.getSheetAt(0);
 			
@@ -247,7 +248,7 @@ public class ProductServiceImpl implements ProductService {
 				cell4.setCellStyle(styleDefault);
 				
 				Cell cell5 = row.createCell(5);
-				if(product.getServiceId() != null) {
+				if(UtilFunctions.noEsNulo(product.getServiceId())) {
 					List<String> codes = Arrays.asList(product.getServiceId().split(","));
 					List<ServiceEntity> listServiceByCode = serviceJpaRepository.getListServiceByCodes(codes);
 					String listServices = "";
